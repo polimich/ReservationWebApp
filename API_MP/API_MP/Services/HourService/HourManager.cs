@@ -1,6 +1,7 @@
 ﻿using API_MP.Data;
 using API_MP.Model;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -14,10 +15,12 @@ namespace API_MP.Services.HourService
     {
         private ApplicationDbContext _context;
         private readonly IHttpContextAccessor _httpContextAccessor;
-        public HourManager(ApplicationDbContext context, IHttpContextAccessor httpContextAccessor)
+        private UserManager<ApplicationUser> _userManager;
+        public HourManager(ApplicationDbContext context, IHttpContextAccessor httpContextAccessor, UserManager<ApplicationUser> userManager)
         {
             _context = context;
             _httpContextAccessor = httpContextAccessor;
+            _userManager = userManager;
         }
 
         public async Task<Hour> Create(Hour input)
@@ -38,7 +41,7 @@ namespace API_MP.Services.HourService
         public async Task<Hour> Delete(int id)
         {
             Hour hour = _context.Hours.Find(id);
-            if(hour != null)
+            if (hour != null)
             {
                 _context.Hours.Remove(hour);
                 await _context.SaveChangesAsync();
@@ -83,12 +86,12 @@ namespace API_MP.Services.HourService
                 return null;
             }
 
-           
+
         }
 
         public async Task<ICollection<Hour>> GetUsersWeek(string userid, DateTime startdate)
         {
-            
+
             return await _context.Hours.Where(hour => hour.Start.Date > StartOfWeek(startdate) && hour.Start.Date < EndOfWeek(startdate) && hour.Person == userid).ToListAsync();
         }
 
@@ -114,9 +117,20 @@ namespace API_MP.Services.HourService
             return dateTime.AddDays(-1 * days).Date;
         }
 
-        public Task<Hour> Get(string Person, DateTime time)
+        public async Task<Hour> GetHour(string userid, string Start)
         {
-            throw new NotImplementedException();
+            var user = _context.Users.Find(userid);
+            
+            if (await _userManager.IsInRoleAsync(user, "Trener"))
+            {
+                return await _context.Hours.FirstOrDefaultAsync(hour => hour.Requester == userid && hour.Start == DateTime.Parse(Start));
+            }
+            else
+            {
+                return await _context.Hours.FirstOrDefaultAsync(hour => hour.Person == userid && hour.Start == DateTime.Parse(Start));
+            }
+            
+      
         }
     }
 }

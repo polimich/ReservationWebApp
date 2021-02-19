@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace API_MP.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20210213101004_Name")]
-    partial class Name
+    [Migration("20210218210352_Init")]
+    partial class Init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -50,15 +50,15 @@ namespace API_MP.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "578fa5d8-b74b-4675-bc52-9cf1bca8a96d",
-                            ConcurrencyStamp = "8f7bb45a-cc09-4c04-9391-18d75cbe4718",
+                            Id = "5b1c2b5e-08bf-4a98-ba54-b884e1fbbfbf",
+                            ConcurrencyStamp = "3f26f181-d65d-415f-8502-01d565fc7e8d",
                             Name = "Trener",
                             NormalizedName = "TRENER"
                         },
                         new
                         {
-                            Id = "395a0a42-56ec-494d-bc20-9de745b26465",
-                            ConcurrencyStamp = "64be2bce-0cd2-4a48-b1bd-4d781e97c91d",
+                            Id = "fac9bb7e-6026-4f4b-ba37-0727c4642f27",
+                            ConcurrencyStamp = "be5cbb2f-4b52-494c-96cf-52d4ad228c52",
                             Name = "Student",
                             NormalizedName = "STUDENT"
                         });
@@ -141,33 +141,37 @@ namespace API_MP.Migrations
                         {
                             Id = "1",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "48a417aa-cedd-4f54-9ca1-830ce8cee9a7",
+                            ConcurrencyStamp = "a1acd6c6-824f-40ef-96b3-307e5d0b949e",
                             Email = "trener@gmail.com",
                             EmailConfirmed = true,
                             FirstName = "Pavel",
                             LastName = "Markovič",
                             LockoutEnabled = false,
-                            PasswordHash = "AQAAAAEAACcQAAAAENGYE+SAyV78N/SoIjm9hAVS2beOjYXbX1aZBam8wDuwgHrgzX7Uwds82LvPFK3zdA==",
+                            NormalizedEmail = "TRENER@GMAIL.COM",
+                            NormalizedUserName = "TRENER@GMAIL.COM",
+                            PasswordHash = "AQAAAAEAACcQAAAAEJHF2oTBjfvBTdlGCu6X1a61nbWU7MuKbZB9Fr0PdIrikTSq4j4M2e4s1onDLmVFOQ==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "404cc27c-36be-47de-9b9a-e4f762be9a08",
+                            SecurityStamp = "5bf5e299-046f-4fab-8719-6b9e233274d1",
                             TwoFactorEnabled = false,
-                            UserName = "Trener"
+                            UserName = "trener@gmail.com"
                         },
                         new
                         {
                             Id = "2",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "9faf79f0-cb40-410c-be8e-b6bbac240cce",
+                            ConcurrencyStamp = "add1aefe-e2a4-4c89-a7ec-c9028c1bfcb1",
                             Email = "student@gmail.com",
                             EmailConfirmed = true,
                             FirstName = "Michael",
                             LastName = "Polívka",
                             LockoutEnabled = false,
-                            PasswordHash = "AQAAAAEAACcQAAAAEEA/Z1Jy5iYd3lqE+fXcwtJFVwiNxHXlVp62bY2XQL6P3oN/aFuWcX58jG6vIsF3Lg==",
+                            NormalizedEmail = "STUDENT@GMAIL.COM",
+                            NormalizedUserName = "STUDENT@GMAIL.COM",
+                            PasswordHash = "AQAAAAEAACcQAAAAEJ5URZsOhFK3crg6cTuHrazm4N852Vdq5d4ScBccw2MHHxAcDyZFSzlvmEEgrzNZxw==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "16563d54-8034-44a2-bbce-9890029f1896",
+                            SecurityStamp = "76f24ad3-3785-4520-84f0-be98321fb75d",
                             TwoFactorEnabled = false,
-                            UserName = "Student"
+                            UserName = "student@gmail.com"
                         });
                 });
 
@@ -318,12 +322,12 @@ namespace API_MP.Migrations
                         new
                         {
                             UserId = "1",
-                            RoleId = "578fa5d8-b74b-4675-bc52-9cf1bca8a96d"
+                            RoleId = "5b1c2b5e-08bf-4a98-ba54-b884e1fbbfbf"
                         },
                         new
                         {
                             UserId = "2",
-                            RoleId = "395a0a42-56ec-494d-bc20-9de745b26465"
+                            RoleId = "fac9bb7e-6026-4f4b-ba37-0727c4642f27"
                         });
                 });
 

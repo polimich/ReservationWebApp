@@ -30,8 +30,8 @@ namespace API_MP.Data
 
             var hasher = new PasswordHasher<ApplicationUser>();
 
-            var trener = new ApplicationUser { Id = "1", UserName = "Trener", Email = "trener@gmail.com", EmailConfirmed = true, PasswordHash = hasher.HashPassword(null, "Admin_123") , FirstName = "Pavel", LastName ="Markovič"};
-            var student = new ApplicationUser { Id = "2", UserName = "Student", Email = "student@gmail.com", EmailConfirmed = true, PasswordHash = hasher.HashPassword(null, "Admin_123"), FirstName = "Michael", LastName = "Polívka" };
+            var trener = new ApplicationUser { Id = "1",UserName= "trener@gmail.com", NormalizedUserName= "TRENER@GMAIL.COM",NormalizedEmail= "TRENER@GMAIL.COM", Email = "trener@gmail.com", EmailConfirmed = true, PasswordHash = hasher.HashPassword(null, "Admin_123") , FirstName = "Pavel", LastName ="Markovič"};
+            var student = new ApplicationUser { Id = "2", UserName = "student@gmail.com", NormalizedUserName = "STUDENT@GMAIL.COM", NormalizedEmail = "STUDENT@GMAIL.COM", Email = "student@gmail.com", EmailConfirmed = true, PasswordHash = hasher.HashPassword(null, "Admin_123"), FirstName = "Michael", LastName = "Polívka" };
             modelBuilder.Entity<ApplicationUser>().HasData(trener);
             modelBuilder.Entity<ApplicationUser>().HasData(student);
 

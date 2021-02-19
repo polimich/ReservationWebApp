@@ -29,11 +29,11 @@ namespace API_MP.Controllers
         {
             return await _hourManager.GetCurrentUsersWeek(startdate);
         }
-        [HttpGet("{id}")]
+        [HttpGet("{userid}/{stardate}")]
 
-        public async Task<IEnumerable<Hour>> Get(string userid, [FromBody] DateTime startdate)
+        public async Task<Hour> Get( string userid, string startdate)
         {
-            return await _hourManager.GetUsersWeek(userid, startdate);
+            return await _hourManager.GetHour(userid, startdate);
         }
         [HttpPost]
         public async Task Post ([FromBody] Hour hour)

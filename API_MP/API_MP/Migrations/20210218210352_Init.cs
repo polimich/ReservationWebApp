@@ -39,7 +39,9 @@ namespace API_MP.Migrations
                     TwoFactorEnabled = table.Column<bool>(nullable: false),
                     LockoutEnd = table.Column<DateTimeOffset>(nullable: true),
                     LockoutEnabled = table.Column<bool>(nullable: false),
-                    AccessFailedCount = table.Column<int>(nullable: false)
+                    AccessFailedCount = table.Column<int>(nullable: false),
+                    FirstName = table.Column<string>(nullable: false),
+                    LastName = table.Column<string>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -188,17 +190,17 @@ namespace API_MP.Migrations
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
                 values: new object[,]
                 {
-                    { "361a371f-f61a-416b-bc1c-321a5c909cc6", "f56cbf17-2418-461f-ba8e-abd302e95427", "Trener", "TRENER" },
-                    { "bbd7118c-e8b4-472d-a277-913798b24667", "b5e838a4-ec6a-4fbb-bebf-5e4a5b910baa", "Student", "STUDENT" }
+                    { "5b1c2b5e-08bf-4a98-ba54-b884e1fbbfbf", "3f26f181-d65d-415f-8502-01d565fc7e8d", "Trener", "TRENER" },
+                    { "fac9bb7e-6026-4f4b-ba37-0727c4642f27", "be5cbb2f-4b52-494c-96cf-52d4ad228c52", "Student", "STUDENT" }
                 });
 
             migrationBuilder.InsertData(
                 table: "AspNetUsers",
-                columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Email", "EmailConfirmed", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
+                columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Email", "EmailConfirmed", "FirstName", "LastName", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
                 values: new object[,]
                 {
-                    { "1", 0, "d5ee0b27-d79a-4a3c-846f-6f143671baff", "trener@gmail.com", true, false, null, null, null, "AQAAAAEAACcQAAAAECUoym4H86k4cIqYdj3kzsHTsrbrbac+FrK3fzgL4DpMUucv893ga76m9MjhwVQ8yQ==", null, false, "13b5c3fa-8227-483c-8561-bcf2225f44d9", false, "Trener" },
-                    { "2", 0, "6fffed4f-33e7-4260-ad24-b04a152d170d", "student@gmail.com", true, false, null, null, null, "AQAAAAEAACcQAAAAED2CDvrp0mJUY8n/YtXy28oSh333k78W3ev7/qHwDg8Z7a9lScXqNzEspQGFU2x3Mg==", null, false, "21b2f621-ed85-4ba6-81b8-8a8fd021fa70", false, "Student" }
+                    { "1", 0, "a1acd6c6-824f-40ef-96b3-307e5d0b949e", "trener@gmail.com", true, "Pavel", "Markovič", false, null, "TRENER@GMAIL.COM", "TRENER@GMAIL.COM", "AQAAAAEAACcQAAAAEJHF2oTBjfvBTdlGCu6X1a61nbWU7MuKbZB9Fr0PdIrikTSq4j4M2e4s1onDLmVFOQ==", null, false, "5bf5e299-046f-4fab-8719-6b9e233274d1", false, "trener@gmail.com" },
+                    { "2", 0, "add1aefe-e2a4-4c89-a7ec-c9028c1bfcb1", "student@gmail.com", true, "Michael", "Polívka", false, null, "STUDENT@GMAIL.COM", "STUDENT@GMAIL.COM", "AQAAAAEAACcQAAAAEJ5URZsOhFK3crg6cTuHrazm4N852Vdq5d4ScBccw2MHHxAcDyZFSzlvmEEgrzNZxw==", null, false, "76f24ad3-3785-4520-84f0-be98321fb75d", false, "student@gmail.com" }
                 });
 
             migrationBuilder.InsertData(
@@ -209,12 +211,12 @@ namespace API_MP.Migrations
             migrationBuilder.InsertData(
                 table: "AspNetUserRoles",
                 columns: new[] { "UserId", "RoleId" },
-                values: new object[] { "1", "361a371f-f61a-416b-bc1c-321a5c909cc6" });
+                values: new object[] { "1", "5b1c2b5e-08bf-4a98-ba54-b884e1fbbfbf" });
 
             migrationBuilder.InsertData(
                 table: "AspNetUserRoles",
                 columns: new[] { "UserId", "RoleId" },
-                values: new object[] { "2", "bbd7118c-e8b4-472d-a277-913798b24667" });
+                values: new object[] { "2", "fac9bb7e-6026-4f4b-ba37-0727c4642f27" });
 
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",

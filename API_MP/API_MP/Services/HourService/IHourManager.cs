@@ -11,7 +11,7 @@ namespace API_MP.Services.HourService
         Task<ICollection<Hour>> ListAllHours();
         Task<ICollection<Hour>> GetCurrentUsersWeek(DateTime startdate); //id prihlaseneho
         Task<ICollection<Hour>> GetUsersWeek(string user, DateTime startdate);
-        Task<Hour> Get(string Person, DateTime time);
+        Task<Hour> GetHour(string userid, string time);
         Task<Hour> Create(Hour input);
         Task<Hour> Delete(int id);
         Task<Hour> Update(int id, Hour input);
