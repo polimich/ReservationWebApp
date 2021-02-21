@@ -9,8 +9,7 @@ namespace API_MP.Services.HourService
     public interface IHourManager
     {
         Task<ICollection<Hour>> ListAllHours();
-        Task<ICollection<Hour>> GetCurrentUsersWeek(DateTime startdate); //id prihlaseneho
-        Task<ICollection<Hour>> GetUsersWeek(string user, DateTime startdate);
+        Task<ICollection<Hour>> GetUsersWeek(string user, string startdate);
         Task<Hour> GetHour(string userid, string time);
         Task<Hour> Create(Hour input);
         Task<Hour> Delete(int id);

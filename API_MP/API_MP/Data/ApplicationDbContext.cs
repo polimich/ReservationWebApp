@@ -40,7 +40,14 @@ namespace API_MP.Data
             modelBuilder.Entity<IdentityUserRole<string>>().ToTable("AspNetUserRoles");
             modelBuilder.Entity<IdentityUserRole<string>>().HasData(new IdentityUserRole<string> { UserId = trener.Id, RoleId = TrenerRole.Id });
             modelBuilder.Entity<IdentityUserRole<string>>().HasData(new IdentityUserRole<string> { UserId = student.Id, RoleId = StudentRole.Id });
+
+            //student hodiny
             modelBuilder.Entity<Hour>().HasData(new Hour { Id = 1, isOnetime = true, Start = new DateTime(2021, 2, 10, 8, 0, 0), End = new DateTime(2021, 2, 10, 9, 0, 0), Person = student.Id, Requester = trener.Id });
+            modelBuilder.Entity<Hour>().HasData(new Hour { Id = 2, isOnetime = false, Start = new DateTime(2021, 2, 11, 8, 0, 0), End = new DateTime(2021, 2, 11, 9, 0, 0), Person = student.Id, Requester = trener.Id });
+            modelBuilder.Entity<Hour>().HasData(new Hour { Id = 3, isOnetime = false, Start = new DateTime(2021, 2, 12, 8, 0, 0), End = new DateTime(2021, 2, 12, 9, 0, 0), Person = student.Id, Requester = trener.Id });
+            modelBuilder.Entity<Hour>().HasData(new Hour { Id = 4, isOnetime = false, Start = new DateTime(2021, 2, 13, 8, 0, 0), End = new DateTime(2021, 2, 13, 10, 0, 0), Person = student.Id, Requester = trener.Id });
+            modelBuilder.Entity<Hour>().HasData(new Hour { Id = 5, isOnetime = true, Start = new DateTime(2021, 2, 16, 8, 0, 0), End = new DateTime(2021, 2, 16, 9, 0, 0), Person = student.Id, Requester = trener.Id });
+
         }
     }
 }

@@ -23,15 +23,15 @@ namespace API_MP.Controllers
         {
             return await _hourManager.ListAllHours();
         }
-        [HttpGet("{startdate}"), ActionName("GetCurrentUsersWeek")]
+        [HttpGet("[action]/{userid}/{startdate}")]
 
-        public async Task<IEnumerable<Hour>> Get(DateTime startdate)
+        public async Task<IEnumerable<Hour>> GetUsersWeek(string userid, string startdate)
         {
-            return await _hourManager.GetCurrentUsersWeek(startdate);
+            return await _hourManager.GetUsersWeek(userid ,startdate);
         }
         [HttpGet("{userid}/{stardate}")]
 
-        public async Task<Hour> Get( string userid, string startdate)
+        public async Task<Hour> Get(string userid, string startdate)
         {
             return await _hourManager.GetHour(userid, startdate);
         }
@@ -53,7 +53,7 @@ namespace API_MP.Controllers
         [HttpGet("{id}")]
         public async Task Get(int id)
         {
-            await _hourManager.Delete(id);
+            await _hourManager.Read(id);
         }
 
     }

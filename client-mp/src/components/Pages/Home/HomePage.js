@@ -1,5 +1,6 @@
 import React from "react";
 import { Col, Container, Row } from "reactstrap";
+import ListUsers from "./ListUsers";
 import Timetable from "./Timetable/Timetable";
 
 const HomePage = () => {
@@ -9,7 +10,9 @@ const HomePage = () => {
         <Col xs="8">
           <Timetable />
         </Col>
-        <Col></Col>
+        <Col>
+          <ListUsers />
+        </Col>
       </Row>
     </Container>
   );

@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\micha\\Desktop\\ReservationWebApp\\ReservationWebApp\\API_MP\\API_MP\\API_MP.csproj": {}
+    "C:\\Users\\Michael\\Desktop\\Skola\\MaturitniPrace\\MaturitniPrace\\API_MP\\API_MP\\API_MP.csproj": {}
   },
   "projects": {
-    "C:\\Users\\micha\\Desktop\\ReservationWebApp\\ReservationWebApp\\API_MP\\API_MP\\API_MP.csproj": {
+    "C:\\Users\\Michael\\Desktop\\Skola\\MaturitniPrace\\MaturitniPrace\\API_MP\\API_MP\\API_MP.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\micha\\Desktop\\ReservationWebApp\\ReservationWebApp\\API_MP\\API_MP\\API_MP.csproj",
+        "projectUniqueName": "C:\\Users\\Michael\\Desktop\\Skola\\MaturitniPrace\\MaturitniPrace\\API_MP\\API_MP\\API_MP.csproj",
         "projectName": "API_MP",
-        "projectPath": "C:\\Users\\micha\\Desktop\\ReservationWebApp\\ReservationWebApp\\API_MP\\API_MP\\API_MP.csproj",
-        "packagesPath": "C:\\Users\\micha\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\micha\\Desktop\\ReservationWebApp\\ReservationWebApp\\API_MP\\API_MP\\obj\\",
+        "projectPath": "C:\\Users\\Michael\\Desktop\\Skola\\MaturitniPrace\\MaturitniPrace\\API_MP\\API_MP\\API_MP.csproj",
+        "packagesPath": "C:\\Users\\Michael\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Michael\\Desktop\\Skola\\MaturitniPrace\\MaturitniPrace\\API_MP\\API_MP\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\micha\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Michael\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [

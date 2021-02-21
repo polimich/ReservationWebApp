@@ -89,17 +89,21 @@ namespace API_MP.Services.HourService
 
         }
 
-        public async Task<ICollection<Hour>> GetUsersWeek(string userid, DateTime startdate)
+        public async Task<ICollection<Hour>> GetUsersWeek(string userid, string startdate)
         {
+            DateTime Start = DateTime.Parse(startdate);
+            var user = _context.Users.Find(userid);
+            if (await _userManager.IsInRoleAsync(user, "Trener"))
+            {
+                return await _context.Hours.Where(hour => hour.Start.Date > StartOfWeek(Start) && hour.Start.Date < EndOfWeek(Start) && hour.Requester == userid).ToListAsync();
+            }
+            else
+            {
+                return await _context.Hours.Where(hour => hour.Start.Date > StartOfWeek(Start) && hour.Start.Date < EndOfWeek(Start) && hour.Person == userid).ToListAsync();
 
-            return await _context.Hours.Where(hour => hour.Start.Date > StartOfWeek(startdate) && hour.Start.Date < EndOfWeek(startdate) && hour.Person == userid).ToListAsync();
+            }
         }
 
-        public async Task<ICollection<Hour>> GetCurrentUsersWeek(DateTime startdate)
-        {
-            string userid = _httpContextAccessor.HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value;
-            return await _context.Hours.Where(hour => hour.Start.Date > StartOfWeek(startdate) && hour.Start.Date < EndOfWeek(startdate) && hour.Person == userid).ToListAsync();
-        }
         public static DateTime EndOfWeek(DateTime dateTime)
         {
             DateTime start = StartOfWeek(dateTime);
