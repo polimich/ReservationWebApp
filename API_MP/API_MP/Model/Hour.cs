@@ -20,6 +20,8 @@ namespace API_MP.Model
         /// Id kdo je na hodině, pokud volna hodina tak nikdo
         /// </summary>
         [Required]
+        public string Name { get; set; }
+        [Required]
         [DisplayName("Kdo je na hodinw/ U koho hodina")]
         public string Person { get; set; }
         /// <summary>

@@ -13,5 +13,7 @@ namespace API_MP.Model
         public string FirstName { get; set; }
         [Required]
         public string LastName { get; set; }
+
+        public string WhatITeach { get; set; }
     }
 }

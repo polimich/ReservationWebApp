@@ -15,6 +15,7 @@ namespace API_MP.Services.HourService
         Task<Hour> Delete(int id);
         Task<Hour> Update(int id, Hour input);
         Task<Hour> Read(int id);
+        Task<ICollection<Hour>> GetAllUsersHours(string userid);
 
 
     }

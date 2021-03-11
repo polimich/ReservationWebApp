@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
@@ -60,8 +61,14 @@ namespace API_MP.Services
             if (result.Succeeded)
             {
                 var user = await _userManager.FindByNameAsync(userData.Email);
+                var role = await _userManager.IsInRoleAsync(user, "Trener");
                 AuthorizationToken token = GenerateJSONWebToken(user);
-                return Ok(token);
+                LoginResponse response = new LoginResponse();
+                response.Name = user.FirstName +" "+ user.LastName;
+                response.Role = role? "Trener" : "Student";
+                response.Token = token;
+                response.UserId = user.Id;
+                return Ok(response);
             }
             return Unauthorized();
         }
@@ -79,7 +86,12 @@ namespace API_MP.Services
                 UserName = input.Email,
                 Email = input.Email,
                 EmailConfirmed = true,
-                PasswordHash = hasher.HashPassword(null, input.Password)
+                PasswordHash = hasher.HashPassword(null, input.Password),
+                FirstName = input.Firstname,
+                LastName = input.LastName,
+                WhatITeach = input.WhatITeach
+
+
             };
             
             
@@ -87,8 +99,21 @@ namespace API_MP.Services
             await _userManager.AddToRoleAsync(newUser, input.Role);
             if (result.Succeeded)
             {
-                return Ok();
-                //return CreatedAtAction("GetAccount", new { id = newUser.Id }, newUser);
+                var result1 = await _signInManager.PasswordSignInAsync(newUser.Email, input.Password, false, false);
+                if (result1.Succeeded)
+                {
+                    user = await _userManager.FindByNameAsync(newUser.Email);
+                    var role = await _userManager.IsInRoleAsync(user, "Trener");
+                    AuthorizationToken token = GenerateJSONWebToken(user);
+                    LoginResponse response = new LoginResponse();
+                    response.Name = user.FirstName + " " + user.LastName;
+                    response.Role = role ? "Trener" : "Student";
+                    response.Token = token;
+                    response.UserId = user.Id;
+                    response.WhatITeach = user.WhatITeach;
+                    return Ok(response);
+                }
+                else { return BadRequest(result.Errors); }
             }
             else
             {

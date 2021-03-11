@@ -9,5 +9,4 @@ namespace API_MP.Model
     {
         public string AccessToken { get; set; }
     }
-
 }

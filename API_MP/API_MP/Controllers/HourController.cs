@@ -1,5 +1,6 @@
 ﻿using API_MP.Model;
 using API_MP.Services.HourService;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -18,7 +19,9 @@ namespace API_MP.Controllers
         {
             _hourManager = hourManager;
         }
+        
         [HttpGet]
+        [Authorize]
         public async Task<IEnumerable<Hour>> Get()
         {
             return await _hourManager.ListAllHours();
@@ -29,11 +32,16 @@ namespace API_MP.Controllers
         {
             return await _hourManager.GetUsersWeek(userid ,startdate);
         }
-        [HttpGet("{userid}/{stardate}")]
+        [HttpGet("{userid}/{startdate}")]
 
         public async Task<Hour> Get(string userid, string startdate)
         {
             return await _hourManager.GetHour(userid, startdate);
+        }
+        [HttpGet("[action]/{userid}")]
+        public async Task<ICollection<Hour>>GetAllUsersHours(string userid)
+        {
+            return await _hourManager.GetAllUsersHours(userid);
         }
         [HttpPost]
         public async Task Post ([FromBody] Hour hour)
@@ -50,6 +58,7 @@ namespace API_MP.Controllers
         {
             await _hourManager.Delete(id);
         }
+        [Authorize]
         [HttpGet("{id}")]
         public async Task Get(int id)
         {

@@ -41,7 +41,8 @@ namespace API_MP.Migrations
                     LockoutEnabled = table.Column<bool>(nullable: false),
                     AccessFailedCount = table.Column<int>(nullable: false),
                     FirstName = table.Column<string>(nullable: false),
-                    LastName = table.Column<string>(nullable: false)
+                    LastName = table.Column<string>(nullable: false),
+                    WhatITeach = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -68,6 +69,7 @@ namespace API_MP.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
+                    Name = table.Column<string>(nullable: false),
                     Person = table.Column<string>(nullable: false),
                     Start = table.Column<DateTime>(nullable: false),
                     End = table.Column<DateTime>(nullable: false),
@@ -190,33 +192,55 @@ namespace API_MP.Migrations
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
                 values: new object[,]
                 {
-                    { "5b1c2b5e-08bf-4a98-ba54-b884e1fbbfbf", "3f26f181-d65d-415f-8502-01d565fc7e8d", "Trener", "TRENER" },
-                    { "fac9bb7e-6026-4f4b-ba37-0727c4642f27", "be5cbb2f-4b52-494c-96cf-52d4ad228c52", "Student", "STUDENT" }
+                    { "c48cbdad-2ed6-47b5-a949-e83f10e484e1", "ff7acd48-c20a-4e61-abfd-88b4a65eeb10", "Trener", "TRENER" },
+                    { "8b76af91-6aec-45b0-a930-fa95c80532ac", "c6537cc0-aa77-4670-ad0c-41bc812a90a9", "Student", "STUDENT" }
                 });
 
             migrationBuilder.InsertData(
                 table: "AspNetUsers",
-                columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Email", "EmailConfirmed", "FirstName", "LastName", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
+                columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Email", "EmailConfirmed", "FirstName", "LastName", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName", "WhatITeach" },
                 values: new object[,]
                 {
-                    { "1", 0, "a1acd6c6-824f-40ef-96b3-307e5d0b949e", "trener@gmail.com", true, "Pavel", "Markovič", false, null, "TRENER@GMAIL.COM", "TRENER@GMAIL.COM", "AQAAAAEAACcQAAAAEJHF2oTBjfvBTdlGCu6X1a61nbWU7MuKbZB9Fr0PdIrikTSq4j4M2e4s1onDLmVFOQ==", null, false, "5bf5e299-046f-4fab-8719-6b9e233274d1", false, "trener@gmail.com" },
-                    { "2", 0, "add1aefe-e2a4-4c89-a7ec-c9028c1bfcb1", "student@gmail.com", true, "Michael", "Polívka", false, null, "STUDENT@GMAIL.COM", "STUDENT@GMAIL.COM", "AQAAAAEAACcQAAAAEJ5URZsOhFK3crg6cTuHrazm4N852Vdq5d4ScBccw2MHHxAcDyZFSzlvmEEgrzNZxw==", null, false, "76f24ad3-3785-4520-84f0-be98321fb75d", false, "student@gmail.com" }
+                    { "1", 0, "7a94b31e-6ac5-4165-91d6-d98d193f0d26", "trener@gmail.com", true, "Pavel", "Markovič", false, null, "TRENER@GMAIL.COM", "TRENER@GMAIL.COM", "AQAAAAEAACcQAAAAEHf+p5jH2e6bp4cQfeOhlXRYatTVuKSFJHDWvlAXBvb/8jbgalZ2ZyawZvhpbunPdg==", null, false, "695f7a4a-d7e6-40ca-9690-bff26c84a59c", false, "trener@gmail.com", "Tenis" },
+                    { "2", 0, "04199b78-53fb-44ad-a69b-5ce25337c489", "student@gmail.com", true, "Michael", "Polívka", false, null, "STUDENT@GMAIL.COM", "STUDENT@GMAIL.COM", "AQAAAAEAACcQAAAAEBmN2bjWpd/3Ho5/XmooCiRQ2OIi0YXn/ak8KoWu2blXgVZ2/pXQMhGHOyrcVIf98g==", null, false, "2ca9d3e2-e563-4c6e-a195-a91baad101c5", false, "student@gmail.com", null }
                 });
 
             migrationBuilder.InsertData(
                 table: "Hours",
-                columns: new[] { "Id", "End", "Person", "Requester", "Start", "isOnetime" },
-                values: new object[] { 1, new DateTime(2021, 2, 10, 9, 0, 0, 0, DateTimeKind.Unspecified), "2", "1", new DateTime(2021, 2, 10, 8, 0, 0, 0, DateTimeKind.Unspecified), true });
+                columns: new[] { "Id", "End", "Name", "Person", "Requester", "Start", "isOnetime" },
+                values: new object[,]
+                {
+                    { 16, new DateTime(2021, 3, 4, 14, 0, 0, 0, DateTimeKind.Unspecified), "Tenis", "2", "1", new DateTime(2021, 3, 4, 13, 0, 0, 0, DateTimeKind.Unspecified), true },
+                    { 15, new DateTime(2021, 3, 4, 9, 0, 0, 0, DateTimeKind.Unspecified), "Tenis", "2", "1", new DateTime(2021, 3, 4, 8, 0, 0, 0, DateTimeKind.Unspecified), true },
+                    { 14, new DateTime(2021, 3, 3, 13, 0, 0, 0, DateTimeKind.Unspecified), "Tenis", "2", "1", new DateTime(2021, 3, 3, 12, 0, 0, 0, DateTimeKind.Unspecified), false },
+                    { 13, new DateTime(2021, 3, 3, 9, 0, 0, 0, DateTimeKind.Unspecified), "Tenis", "2", "1", new DateTime(2021, 3, 3, 8, 0, 0, 0, DateTimeKind.Unspecified), false },
+                    { 12, new DateTime(2021, 3, 2, 12, 0, 0, 0, DateTimeKind.Unspecified), "Tenis", "2", "1", new DateTime(2021, 3, 2, 11, 0, 0, 0, DateTimeKind.Unspecified), false },
+                    { 11, new DateTime(2021, 3, 2, 9, 0, 0, 0, DateTimeKind.Unspecified), "Tenis", "2", "1", new DateTime(2021, 3, 2, 8, 0, 0, 0, DateTimeKind.Unspecified), true },
+                    { 20, new DateTime(2021, 3, 1, 16, 0, 0, 0, DateTimeKind.Unspecified), "Tenis", "2", "1", new DateTime(2021, 3, 1, 15, 0, 0, 0, DateTimeKind.Unspecified), true },
+                    { 19, new DateTime(2021, 3, 1, 9, 0, 0, 0, DateTimeKind.Unspecified), "Tenis", "2", "1", new DateTime(2021, 3, 1, 8, 0, 0, 0, DateTimeKind.Unspecified), false },
+                    { 10, new DateTime(2021, 2, 26, 16, 0, 0, 0, DateTimeKind.Unspecified), "Tenis", "2", "1", new DateTime(2021, 2, 26, 15, 0, 0, 0, DateTimeKind.Unspecified), true },
+                    { 8, new DateTime(2021, 2, 25, 11, 0, 0, 0, DateTimeKind.Unspecified), "Tenis", "2", "1", new DateTime(2021, 2, 25, 10, 0, 0, 0, DateTimeKind.Unspecified), false },
+                    { 17, new DateTime(2021, 3, 5, 9, 0, 0, 0, DateTimeKind.Unspecified), "Tenis", "2", "1", new DateTime(2021, 3, 5, 8, 0, 0, 0, DateTimeKind.Unspecified), false },
+                    { 7, new DateTime(2021, 2, 25, 9, 0, 0, 0, DateTimeKind.Unspecified), "Tenis", "2", "1", new DateTime(2021, 2, 25, 8, 0, 0, 0, DateTimeKind.Unspecified), false },
+                    { 6, new DateTime(2021, 2, 24, 14, 0, 0, 0, DateTimeKind.Unspecified), "Tenis", "2", "1", new DateTime(2021, 2, 24, 13, 0, 0, 0, DateTimeKind.Unspecified), true },
+                    { 5, new DateTime(2021, 2, 24, 9, 0, 0, 0, DateTimeKind.Unspecified), "Tenis", "2", "1", new DateTime(2021, 2, 24, 8, 0, 0, 0, DateTimeKind.Unspecified), true },
+                    { 4, new DateTime(2021, 2, 23, 13, 0, 0, 0, DateTimeKind.Unspecified), "Tenis", "2", "1", new DateTime(2021, 2, 23, 12, 0, 0, 0, DateTimeKind.Unspecified), false },
+                    { 3, new DateTime(2021, 2, 23, 9, 0, 0, 0, DateTimeKind.Unspecified), "Tenis", "2", "1", new DateTime(2021, 2, 23, 8, 0, 0, 0, DateTimeKind.Unspecified), false },
+                    { 2, new DateTime(2021, 2, 22, 12, 0, 0, 0, DateTimeKind.Unspecified), "Tenis", "2", "1", new DateTime(2021, 2, 22, 11, 0, 0, 0, DateTimeKind.Unspecified), false },
+                    { 1, new DateTime(2021, 2, 22, 9, 0, 0, 0, DateTimeKind.Unspecified), "Tenis", "2", "1", new DateTime(2021, 2, 22, 8, 0, 0, 0, DateTimeKind.Unspecified), true },
+                    { 9, new DateTime(2021, 2, 26, 9, 0, 0, 0, DateTimeKind.Unspecified), "Tenis", "2", "1", new DateTime(2021, 2, 26, 8, 0, 0, 0, DateTimeKind.Unspecified), false },
+                    { 18, new DateTime(2021, 3, 5, 11, 0, 0, 0, DateTimeKind.Unspecified), "Tenis", "2", "1", new DateTime(2021, 3, 5, 10, 0, 0, 0, DateTimeKind.Unspecified), false }
+                });
 
             migrationBuilder.InsertData(
                 table: "AspNetUserRoles",
                 columns: new[] { "UserId", "RoleId" },
-                values: new object[] { "1", "5b1c2b5e-08bf-4a98-ba54-b884e1fbbfbf" });
+                values: new object[] { "1", "c48cbdad-2ed6-47b5-a949-e83f10e484e1" });
 
             migrationBuilder.InsertData(
                 table: "AspNetUserRoles",
                 columns: new[] { "UserId", "RoleId" },
-                values: new object[] { "2", "fac9bb7e-6026-4f4b-ba37-0727c4642f27" });
+                values: new object[] { "2", "8b76af91-6aec-45b0-a930-fa95c80532ac" });
 
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",

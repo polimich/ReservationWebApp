@@ -1,15 +1,15 @@
+import { Card, CardContent, TableCell, Typography } from "@material-ui/core";
 import React from "react";
-import { Card, CardBody, CardSubtitle, CardTitle } from "reactstrap";
 
 const HeaderCell = ({ title }) => {
   return (
-    <th>
+    <TableCell>
       <Card>
-        <CardBody>
-          <CardTitle>{title}</CardTitle>
-        </CardBody>
+        <CardContent>
+          <Typography variant="h6">{title}</Typography>
+        </CardContent>
       </Card>
-    </th>
+    </TableCell>
   );
 };
 

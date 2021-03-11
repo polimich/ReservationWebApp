@@ -48,15 +48,15 @@ namespace API_MP.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "36390f24-8fb2-4e36-b053-b133b05bdc59",
-                            ConcurrencyStamp = "ec126408-8f59-4c52-8632-1e310de11b3b",
+                            Id = "c48cbdad-2ed6-47b5-a949-e83f10e484e1",
+                            ConcurrencyStamp = "ff7acd48-c20a-4e61-abfd-88b4a65eeb10",
                             Name = "Trener",
                             NormalizedName = "TRENER"
                         },
                         new
                         {
-                            Id = "9b22a93a-9faf-45c6-885c-147fe81cf8c8",
-                            ConcurrencyStamp = "1e37ef44-0ebe-4f2e-880f-fac0bfa5bc78",
+                            Id = "8b76af91-6aec-45b0-a930-fa95c80532ac",
+                            ConcurrencyStamp = "c6537cc0-aa77-4670-ad0c-41bc812a90a9",
                             Name = "Student",
                             NormalizedName = "STUDENT"
                         });
@@ -122,6 +122,9 @@ namespace API_MP.Migrations
                         .HasColumnType("nvarchar(256)")
                         .HasMaxLength(256);
 
+                    b.Property<string>("WhatITeach")
+                        .HasColumnType("nvarchar(max)");
+
                     b.HasKey("Id");
 
                     b.HasIndex("NormalizedEmail")
@@ -139,7 +142,7 @@ namespace API_MP.Migrations
                         {
                             Id = "1",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "0d079c26-051e-43b4-a266-b36e04403040",
+                            ConcurrencyStamp = "7a94b31e-6ac5-4165-91d6-d98d193f0d26",
                             Email = "trener@gmail.com",
                             EmailConfirmed = true,
                             FirstName = "Pavel",
@@ -147,17 +150,18 @@ namespace API_MP.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "TRENER@GMAIL.COM",
                             NormalizedUserName = "TRENER@GMAIL.COM",
-                            PasswordHash = "AQAAAAEAACcQAAAAEDn6ujWuqK1T97cMJoKLcWk5qbLd6chkMEaI+vv9diKEEvuC8S5fSWzmZhu5sTWDOA==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEHf+p5jH2e6bp4cQfeOhlXRYatTVuKSFJHDWvlAXBvb/8jbgalZ2ZyawZvhpbunPdg==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "d3861b4c-b162-4d86-a530-62a425b48ae6",
+                            SecurityStamp = "695f7a4a-d7e6-40ca-9690-bff26c84a59c",
                             TwoFactorEnabled = false,
-                            UserName = "trener@gmail.com"
+                            UserName = "trener@gmail.com",
+                            WhatITeach = "Tenis"
                         },
                         new
                         {
                             Id = "2",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "7ab93be1-37d6-4a8c-9509-869800e9b5c9",
+                            ConcurrencyStamp = "04199b78-53fb-44ad-a69b-5ce25337c489",
                             Email = "student@gmail.com",
                             EmailConfirmed = true,
                             FirstName = "Michael",
@@ -165,9 +169,9 @@ namespace API_MP.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "STUDENT@GMAIL.COM",
                             NormalizedUserName = "STUDENT@GMAIL.COM",
-                            PasswordHash = "AQAAAAEAACcQAAAAEAqz/b+AxwR1S4pr14JsV+obbQQnbviyPaGVRd468VhIskCcG6PV72sDszevTbar3A==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEBmN2bjWpd/3Ho5/XmooCiRQ2OIi0YXn/ak8KoWu2blXgVZ2/pXQMhGHOyrcVIf98g==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "08e9900d-0cd3-45ca-88d8-d7ee5a5d8ebb",
+                            SecurityStamp = "2ca9d3e2-e563-4c6e-a195-a91baad101c5",
                             TwoFactorEnabled = false,
                             UserName = "student@gmail.com"
                         });
@@ -202,6 +206,10 @@ namespace API_MP.Migrations
                     b.Property<DateTime>("End")
                         .HasColumnType("datetime2");
 
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("Person")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -224,47 +232,202 @@ namespace API_MP.Migrations
                         new
                         {
                             Id = 1,
-                            End = new DateTime(2021, 2, 10, 9, 0, 0, 0, DateTimeKind.Unspecified),
+                            End = new DateTime(2021, 2, 22, 9, 0, 0, 0, DateTimeKind.Unspecified),
+                            Name = "Tenis",
                             Person = "2",
                             Requester = "1",
-                            Start = new DateTime(2021, 2, 10, 8, 0, 0, 0, DateTimeKind.Unspecified),
+                            Start = new DateTime(2021, 2, 22, 8, 0, 0, 0, DateTimeKind.Unspecified),
                             isOnetime = true
                         },
                         new
                         {
                             Id = 2,
-                            End = new DateTime(2021, 2, 11, 9, 0, 0, 0, DateTimeKind.Unspecified),
+                            End = new DateTime(2021, 2, 22, 12, 0, 0, 0, DateTimeKind.Unspecified),
+                            Name = "Tenis",
                             Person = "2",
                             Requester = "1",
-                            Start = new DateTime(2021, 2, 11, 8, 0, 0, 0, DateTimeKind.Unspecified),
+                            Start = new DateTime(2021, 2, 22, 11, 0, 0, 0, DateTimeKind.Unspecified),
                             isOnetime = false
                         },
                         new
                         {
                             Id = 3,
-                            End = new DateTime(2021, 2, 12, 9, 0, 0, 0, DateTimeKind.Unspecified),
+                            End = new DateTime(2021, 2, 23, 9, 0, 0, 0, DateTimeKind.Unspecified),
+                            Name = "Tenis",
                             Person = "2",
                             Requester = "1",
-                            Start = new DateTime(2021, 2, 12, 8, 0, 0, 0, DateTimeKind.Unspecified),
+                            Start = new DateTime(2021, 2, 23, 8, 0, 0, 0, DateTimeKind.Unspecified),
                             isOnetime = false
                         },
                         new
                         {
                             Id = 4,
-                            End = new DateTime(2021, 2, 13, 10, 0, 0, 0, DateTimeKind.Unspecified),
+                            End = new DateTime(2021, 2, 23, 13, 0, 0, 0, DateTimeKind.Unspecified),
+                            Name = "Tenis",
                             Person = "2",
                             Requester = "1",
-                            Start = new DateTime(2021, 2, 13, 8, 0, 0, 0, DateTimeKind.Unspecified),
+                            Start = new DateTime(2021, 2, 23, 12, 0, 0, 0, DateTimeKind.Unspecified),
                             isOnetime = false
                         },
                         new
                         {
                             Id = 5,
-                            End = new DateTime(2021, 2, 16, 9, 0, 0, 0, DateTimeKind.Unspecified),
+                            End = new DateTime(2021, 2, 24, 9, 0, 0, 0, DateTimeKind.Unspecified),
+                            Name = "Tenis",
                             Person = "2",
                             Requester = "1",
-                            Start = new DateTime(2021, 2, 16, 8, 0, 0, 0, DateTimeKind.Unspecified),
+                            Start = new DateTime(2021, 2, 24, 8, 0, 0, 0, DateTimeKind.Unspecified),
                             isOnetime = true
+                        },
+                        new
+                        {
+                            Id = 6,
+                            End = new DateTime(2021, 2, 24, 14, 0, 0, 0, DateTimeKind.Unspecified),
+                            Name = "Tenis",
+                            Person = "2",
+                            Requester = "1",
+                            Start = new DateTime(2021, 2, 24, 13, 0, 0, 0, DateTimeKind.Unspecified),
+                            isOnetime = true
+                        },
+                        new
+                        {
+                            Id = 7,
+                            End = new DateTime(2021, 2, 25, 9, 0, 0, 0, DateTimeKind.Unspecified),
+                            Name = "Tenis",
+                            Person = "2",
+                            Requester = "1",
+                            Start = new DateTime(2021, 2, 25, 8, 0, 0, 0, DateTimeKind.Unspecified),
+                            isOnetime = false
+                        },
+                        new
+                        {
+                            Id = 8,
+                            End = new DateTime(2021, 2, 25, 11, 0, 0, 0, DateTimeKind.Unspecified),
+                            Name = "Tenis",
+                            Person = "2",
+                            Requester = "1",
+                            Start = new DateTime(2021, 2, 25, 10, 0, 0, 0, DateTimeKind.Unspecified),
+                            isOnetime = false
+                        },
+                        new
+                        {
+                            Id = 9,
+                            End = new DateTime(2021, 2, 26, 9, 0, 0, 0, DateTimeKind.Unspecified),
+                            Name = "Tenis",
+                            Person = "2",
+                            Requester = "1",
+                            Start = new DateTime(2021, 2, 26, 8, 0, 0, 0, DateTimeKind.Unspecified),
+                            isOnetime = false
+                        },
+                        new
+                        {
+                            Id = 10,
+                            End = new DateTime(2021, 2, 26, 16, 0, 0, 0, DateTimeKind.Unspecified),
+                            Name = "Tenis",
+                            Person = "2",
+                            Requester = "1",
+                            Start = new DateTime(2021, 2, 26, 15, 0, 0, 0, DateTimeKind.Unspecified),
+                            isOnetime = true
+                        },
+                        new
+                        {
+                            Id = 19,
+                            End = new DateTime(2021, 3, 1, 9, 0, 0, 0, DateTimeKind.Unspecified),
+                            Name = "Tenis",
+                            Person = "2",
+                            Requester = "1",
+                            Start = new DateTime(2021, 3, 1, 8, 0, 0, 0, DateTimeKind.Unspecified),
+                            isOnetime = false
+                        },
+                        new
+                        {
+                            Id = 20,
+                            End = new DateTime(2021, 3, 1, 16, 0, 0, 0, DateTimeKind.Unspecified),
+                            Name = "Tenis",
+                            Person = "2",
+                            Requester = "1",
+                            Start = new DateTime(2021, 3, 1, 15, 0, 0, 0, DateTimeKind.Unspecified),
+                            isOnetime = true
+                        },
+                        new
+                        {
+                            Id = 11,
+                            End = new DateTime(2021, 3, 2, 9, 0, 0, 0, DateTimeKind.Unspecified),
+                            Name = "Tenis",
+                            Person = "2",
+                            Requester = "1",
+                            Start = new DateTime(2021, 3, 2, 8, 0, 0, 0, DateTimeKind.Unspecified),
+                            isOnetime = true
+                        },
+                        new
+                        {
+                            Id = 12,
+                            End = new DateTime(2021, 3, 2, 12, 0, 0, 0, DateTimeKind.Unspecified),
+                            Name = "Tenis",
+                            Person = "2",
+                            Requester = "1",
+                            Start = new DateTime(2021, 3, 2, 11, 0, 0, 0, DateTimeKind.Unspecified),
+                            isOnetime = false
+                        },
+                        new
+                        {
+                            Id = 13,
+                            End = new DateTime(2021, 3, 3, 9, 0, 0, 0, DateTimeKind.Unspecified),
+                            Name = "Tenis",
+                            Person = "2",
+                            Requester = "1",
+                            Start = new DateTime(2021, 3, 3, 8, 0, 0, 0, DateTimeKind.Unspecified),
+                            isOnetime = false
+                        },
+                        new
+                        {
+                            Id = 14,
+                            End = new DateTime(2021, 3, 3, 13, 0, 0, 0, DateTimeKind.Unspecified),
+                            Name = "Tenis",
+                            Person = "2",
+                            Requester = "1",
+                            Start = new DateTime(2021, 3, 3, 12, 0, 0, 0, DateTimeKind.Unspecified),
+                            isOnetime = false
+                        },
+                        new
+                        {
+                            Id = 15,
+                            End = new DateTime(2021, 3, 4, 9, 0, 0, 0, DateTimeKind.Unspecified),
+                            Name = "Tenis",
+                            Person = "2",
+                            Requester = "1",
+                            Start = new DateTime(2021, 3, 4, 8, 0, 0, 0, DateTimeKind.Unspecified),
+                            isOnetime = true
+                        },
+                        new
+                        {
+                            Id = 16,
+                            End = new DateTime(2021, 3, 4, 14, 0, 0, 0, DateTimeKind.Unspecified),
+                            Name = "Tenis",
+                            Person = "2",
+                            Requester = "1",
+                            Start = new DateTime(2021, 3, 4, 13, 0, 0, 0, DateTimeKind.Unspecified),
+                            isOnetime = true
+                        },
+                        new
+                        {
+                            Id = 17,
+                            End = new DateTime(2021, 3, 5, 9, 0, 0, 0, DateTimeKind.Unspecified),
+                            Name = "Tenis",
+                            Person = "2",
+                            Requester = "1",
+                            Start = new DateTime(2021, 3, 5, 8, 0, 0, 0, DateTimeKind.Unspecified),
+                            isOnetime = false
+                        },
+                        new
+                        {
+                            Id = 18,
+                            End = new DateTime(2021, 3, 5, 11, 0, 0, 0, DateTimeKind.Unspecified),
+                            Name = "Tenis",
+                            Person = "2",
+                            Requester = "1",
+                            Start = new DateTime(2021, 3, 5, 10, 0, 0, 0, DateTimeKind.Unspecified),
+                            isOnetime = false
                         });
                 });
 
@@ -356,12 +519,12 @@ namespace API_MP.Migrations
                         new
                         {
                             UserId = "1",
-                            RoleId = "36390f24-8fb2-4e36-b053-b133b05bdc59"
+                            RoleId = "c48cbdad-2ed6-47b5-a949-e83f10e484e1"
                         },
                         new
                         {
                             UserId = "2",
-                            RoleId = "9b22a93a-9faf-45c6-885c-147fe81cf8c8"
+                            RoleId = "8b76af91-6aec-45b0-a930-fa95c80532ac"
                         });
                 });
 

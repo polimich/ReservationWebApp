@@ -46,6 +46,11 @@ namespace API_MP.Controllers
         {
             return await _accountManager.Login(value);
         }
+        [HttpPost("logout")]
+        public async Task<IActionResult> Logout() 
+        {
+            return await _accountManager.Logout();
+        }
 
         // PUT api/<AccountController>/5
         [HttpPut("{id}")]

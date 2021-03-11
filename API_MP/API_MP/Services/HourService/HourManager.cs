@@ -133,8 +133,10 @@ namespace API_MP.Services.HourService
             {
                 return await _context.Hours.FirstOrDefaultAsync(hour => hour.Person == userid && hour.Start == DateTime.Parse(Start));
             }
-            
-      
+        }
+        public async Task<ICollection<Hour>> GetAllUsersHours(string userid)
+        {
+            return await _context.Hours.Where(hour => hour.Requester == userid).ToListAsync();
         }
     }
 }
