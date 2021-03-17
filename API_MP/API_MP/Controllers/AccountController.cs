@@ -34,6 +34,11 @@ namespace API_MP.Controllers
         {
             return await _accountManager.Get(id);
         }
+        [HttpGet("[action]/{id}")]
+        public async Task<string> GetUserRole(string id)
+        {
+            return await _accountManager.GetUserRole(id);
+        }
 
         // POST api/<AccountController>
         [HttpPost("register")]

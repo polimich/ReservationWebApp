@@ -20,7 +20,7 @@ const App = () => {
             <Menu />
           </Grid>
           <Grid item xs={12}>
-            <Container maxWidth="xl">
+            <Container>
               <Switch>
                 <Route exact path="/" component={NoLogin} />
                 <Route exact path="/home" component={HomePage} />
@@ -32,7 +32,11 @@ const App = () => {
                   path="/userSettings"
                   component={UserSettingsPage}
                 />
-                <Route exact path="/userInfo" component={UserInfoPage} />
+                <Route
+                  exact
+                  path="/userInfo/:userID?"
+                  component={UserInfoPage}
+                />
                 <Route exact path="/test" component={TestMaterialUIFormik} />
               </Switch>
             </Container>

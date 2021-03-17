@@ -129,7 +129,10 @@ const RegisterPage = () => {
             <Grid item xs={6}>
               <Select
                 name="role"
-                options={{ Student: "Student", Trener: "Trainer" }}
+                options={[
+                  { id: "Student", name: "Student" },
+                  { id: "Trener", name: "Trainer" },
+                ]}
                 label="Choose role"
                 onClick={(e) =>
                   setRole(e.target.value === "Trener" ? false : true)

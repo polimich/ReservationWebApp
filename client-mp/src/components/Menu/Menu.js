@@ -34,7 +34,7 @@ const Menu = () => {
     dispatch({ type: SET_USER_ID, payload: null });
   };
   return (
-    <div>
+    <>
       <Navbar light expand="md">
         <NavbarBrand tag={Link} to="/home">
           Home
@@ -87,7 +87,7 @@ const Menu = () => {
           )}
         </Collapse>
       </Navbar>
-    </div>
+    </>
   );
 };
 

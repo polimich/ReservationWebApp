@@ -5,6 +5,7 @@ import { useFormikContext } from "formik";
 const ButtonWrapper = ({ children, ...otherProps }) => {
   const { submitForm } = useFormikContext();
   const handleSubmit = () => {
+    console.log("ahoj");
     submitForm();
   };
   const configButton = {
@@ -12,6 +13,7 @@ const ButtonWrapper = ({ children, ...otherProps }) => {
     color: "primary",
     fullWidth: true,
     onClick: handleSubmit,
+    ...otherProps,
   };
   return <Button {...configButton}>{children}</Button>;
 };

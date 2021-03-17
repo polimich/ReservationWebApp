@@ -69,7 +69,7 @@ const LoginPage = () => {
                 payload: response.data.whatITeach,
               });
 
-              console.log(userId);
+              console.log(response.data);
             })
             .catch((err) => {
               alert("Chybicka");

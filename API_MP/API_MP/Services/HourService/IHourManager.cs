@@ -13,7 +13,7 @@ namespace API_MP.Services.HourService
         Task<Hour> GetHour(string userid, string time);
         Task<Hour> Create(Hour input);
         Task<Hour> Delete(int id);
-        Task<Hour> Update(int id, Hour input);
+        Task<Hour> Update(Hour input);
         Task<Hour> Read(int id);
         Task<ICollection<Hour>> GetAllUsersHours(string userid);
 

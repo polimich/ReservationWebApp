@@ -63,7 +63,17 @@ namespace API_MP.Data
             modelBuilder.Entity<Hour>().HasData(new Hour { Id = 16, isOnetime = true, Start = new DateTime(2021, 3, 4, 13, 0, 0), End = new DateTime(2021, 3, 4, 14, 0, 0), Person = student.Id, Requester = trener.Id, Name = "Tenis" });
             modelBuilder.Entity<Hour>().HasData(new Hour { Id = 17, isOnetime = false, Start = new DateTime(2021, 3, 5, 8, 0, 0), End = new DateTime(2021, 3, 5, 9, 0, 0), Person = student.Id, Requester = trener.Id, Name = "Tenis" });
             modelBuilder.Entity<Hour>().HasData(new Hour { Id = 18, isOnetime = false, Start = new DateTime(2021, 3, 5, 10, 0, 0), End = new DateTime(2021, 3, 5, 11, 0, 0), Person = student.Id, Requester = trener.Id, Name = "Tenis" });
-            
+
+            modelBuilder.Entity<Hour>().HasData(new Hour { Id = 29, isOnetime = false, Start = new DateTime(2021, 3, 12, 8, 0, 0), End = new DateTime(2021, 3, 12, 9, 0, 0), Person = student.Id, Requester = trener.Id, Name = "Tenis" });
+            modelBuilder.Entity<Hour>().HasData(new Hour { Id = 30, isOnetime = true, Start = new DateTime(2021, 3, 12, 15, 0, 0), End = new DateTime(2021, 3, 12, 16, 0, 0), Person = student.Id, Requester = trener.Id, Name = "Tenis" });
+            modelBuilder.Entity<Hour>().HasData(new Hour { Id = 21, isOnetime = true, Start = new DateTime(2021, 3, 8, 8, 0, 0), End = new DateTime(2021, 3, 8, 9, 0, 0), Person = student.Id, Requester = trener.Id, Name = "Tenis" });
+            modelBuilder.Entity<Hour>().HasData(new Hour { Id = 22, isOnetime = false, Start = new DateTime(2021, 3, 8, 11, 0, 0), End = new DateTime(2021, 3, 8, 12, 0, 0), Person = student.Id, Requester = trener.Id, Name = "Tenis" });
+            modelBuilder.Entity<Hour>().HasData(new Hour { Id = 23, isOnetime = false, Start = new DateTime(2021, 3, 9, 8, 0, 0), End = new DateTime(2021, 3, 9, 9, 0, 0), Person = student.Id, Requester = trener.Id, Name = "Tenis" });
+            modelBuilder.Entity<Hour>().HasData(new Hour { Id = 24, isOnetime = false, Start = new DateTime(2021, 3, 9, 12, 0, 0), End = new DateTime(2021, 3, 9, 13, 0, 0), Person = student.Id, Requester = trener.Id, Name = "Tenis" });
+            modelBuilder.Entity<Hour>().HasData(new Hour { Id = 25, isOnetime = true, Start = new DateTime(2021, 3, 10, 8, 0, 0), End = new DateTime(2021, 3, 10, 9, 0, 0), Person = student.Id, Requester = trener.Id, Name = "Tenis" });
+            modelBuilder.Entity<Hour>().HasData(new Hour { Id = 26, isOnetime = true, Start = new DateTime(2021, 3, 10, 13, 0, 0), End = new DateTime(2021, 3, 10, 14, 0, 0), Person = student.Id, Requester = trener.Id, Name = "Tenis" });
+            modelBuilder.Entity<Hour>().HasData(new Hour { Id = 27, isOnetime = false, Start = new DateTime(2021, 3, 11, 8, 0, 0), End = new DateTime(2021, 3, 11, 9, 0, 0), Person = student.Id, Requester = trener.Id, Name = "Tenis" });
+            modelBuilder.Entity<Hour>().HasData(new Hour { Id = 28, isOnetime = false, Start = new DateTime(2021, 3, 11, 10, 0, 0), End = new DateTime(2021, 3, 11, 11, 0, 0), Person = student.Id, Requester = trener.Id, Name = "Tenis" });
         }
     }
 }

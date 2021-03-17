@@ -68,6 +68,7 @@ namespace API_MP.Services
                 response.Role = role? "Trener" : "Student";
                 response.Token = token;
                 response.UserId = user.Id;
+                response.WhatITeach = user.WhatITeach;
                 return Ok(response);
             }
             return Unauthorized();
@@ -186,6 +187,13 @@ namespace API_MP.Services
                 return null;
             }
             return user;
+        }
+
+        public async Task<string> GetUserRole(string id)
+        {
+            var user = await _userManager.FindByIdAsync(id);
+            var role = await _userManager.IsInRoleAsync(user, "Trener");
+            return role ? "Trener" : "Student";
         }
     }
 }

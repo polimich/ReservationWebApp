@@ -9,7 +9,6 @@ const SearchPage = () => {
   return (
     <Container>
       <SearchBar label="Lookup user" term={term} setTerm={setTerm} />
-      {console.log({ term })}
       <br />
       <ListSearchedUsers name={term} />
     </Container>

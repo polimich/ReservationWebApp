@@ -1,7 +1,20 @@
+import { Grid } from "@material-ui/core";
 import React from "react";
+import { useParams } from "react-router-dom/cjs/react-router-dom.min";
+import UserTimetable from "./Timetable";
 
 const UserInfoPage = () => {
-  return <h1>User Information Page</h1>;
+  var { userId } = useParams();
+  if (userId === undefined) userId = "";
+  return (
+    <>
+      <Grid container spacing={2}>
+        <Grid item xs={12}>
+          <UserTimetable />
+        </Grid>
+      </Grid>
+    </>
+  );
 };
 
 export default UserInfoPage;

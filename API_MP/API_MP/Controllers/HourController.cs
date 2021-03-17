@@ -49,9 +49,9 @@ namespace API_MP.Controllers
             await _hourManager.Create(hour);
         }
         [HttpPut]
-        public async Task Put(int id, [FromBody] Hour hour)
+        public async Task Put( [FromBody] Hour hour)
         {
-            await _hourManager.Update(id,hour);
+            await _hourManager.Update(hour);
         }
         [HttpDelete("{id}")]
         public async Task Delete(int id)

@@ -31,7 +31,9 @@ namespace API_MP.Services.HourService
                 Requester = input.Requester,
                 End = input.End,
                 Start = input.Start,
-                isOnetime = input.isOnetime
+                isOnetime = input.isOnetime,
+                Name = input.Name
+
             };
             _context.Hours.Add(newHour);
             await _context.SaveChangesAsync();
@@ -67,9 +69,9 @@ namespace API_MP.Services.HourService
             }
         }
 
-        public async Task<Hour> Update(int id, Hour input)
+        public async Task<Hour> Update(Hour input)
         {
-            Hour hour = _context.Hours.Find(id);
+            Hour hour = _context.Hours.Find(input.Id);
             if (hour != null)
             {
 

@@ -17,6 +17,6 @@ namespace API_MP.Services.AccountService
         Task<IActionResult> ChangePassword(ChangePasswordIM password, string id);
         Task<IActionResult> Delete(string id);
         Task<ApplicationUser> Get(string id);
-
+        Task<string> GetUserRole(string id);
     }
 }
