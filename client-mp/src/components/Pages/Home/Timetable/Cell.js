@@ -246,7 +246,11 @@ const Cell = ({ date, userId }) => {
                     variant="contained"
                     color="secondary"
                     onClick={() => {
-                      api.delete();
+                      api.delete(`/Hour/${hour.id}`).then(() => {
+                        <Alert severity="success">Hour Deleted</Alert>;
+                      });
+                      handleCloseDialogs();
+                      setPersonId("");
                     }}
                   >
                     Delete
