@@ -1,13 +1,13 @@
 import axios from "axios";
-import { useAppContext } from "../providers/ApplicationProvider";
 
 export default axios.create({
   baseURL: "https://localhost:44360/api",
 });
-axios.interceptors.request.use(function (config) {
-  const [{ accessToken }] = useAppContext();
-  const token = accessToken;
-  config.headers.Authorization = token;
-
-  return config;
-});
+(function () {
+  let authToken = sessionStorage.getItem("JWT");
+  if (authToken === null) {
+  } else {
+    axios.defaults.headers.common.Authorization = `${authToken}`;
+    axios.defaults.headers.common.ContentType = "application/json";
+  }
+})();

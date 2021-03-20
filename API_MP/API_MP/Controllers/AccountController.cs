@@ -2,6 +2,7 @@
 using API_MP.Model.AcountIM;
 using API_MP.Services;
 using API_MP.Services.AccountService;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -21,7 +22,7 @@ namespace API_MP.Controllers
         {
             _accountManager = accountManager;
         }
-        // GET: api/<AccountController>
+
         [HttpGet]
         public async Task<IEnumerable<ApplicationUser>> Get()
         {
@@ -39,14 +40,21 @@ namespace API_MP.Controllers
         {
             return await _accountManager.GetUserRole(id);
         }
+        [HttpGet("[action]")]
+        public async Task<ICollection<ApplicationUser>> GetAllStudents()
+        {
+            return await _accountManager.GetAllStudents();
+        }
 
         // POST api/<AccountController>
         [HttpPost("register")]
+        
         public async Task<IActionResult> Register([FromBody] AccountRegistrationIM value)
         {
             return  await _accountManager.Register(value);
         }
         [HttpPost("login")]
+        
         public async Task<IActionResult> Login([FromBody] AccountLoginIM value)
         {
             return await _accountManager.Login(value);

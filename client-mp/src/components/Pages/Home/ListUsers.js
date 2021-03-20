@@ -11,63 +11,40 @@ import { Link } from "react-router-dom";
 import { useEffect, useState } from "react/cjs/react.development";
 import api from "../../../api/api";
 import { useAppContext } from "../../../providers/ApplicationProvider";
+import { GetStudents, GetTrainers } from "./Timetable/Functions";
 require("datejs");
 
 const ListUsers = () => {
-  const [hours, setHours] = useState([]);
   //const start = Date.today().toString("yyyy-MM-ddTHH:mm:ss");
   const start = getToday();
   const [{ accessToken, role, userId }] = useAppContext();
   const [personName, setPersonName] = useState();
+  const [personArr, setPersonArr] = useState();
+  const [isLoading, setLoading] = useState(true);
   const [renderedList, setRenderedList] = useState();
+  var currentPerson = "";
 
   useEffect(() => {
-    var currentPerson = "";
-    api.get(`/Hour/GetUsersWeek/${userId}/${start}`).then((res) => {
-      setHours(res.data);
-    });
-    if (role === "Trener") {
-      setRenderedList(
-        hours.map(({ person }) => {
-          if (currentPerson !== person) {
-            currentPerson = person;
-            api.get(`/Account/${person}`).then((response) => {
-              setPersonName(
-                response.data.firstName + " " + response.data.lastName
-              );
-            });
-            return (
-              <TableRow key={person}>
-                <TableCell component={Link} to={`/userInfo/${person}`}>
-                  {personName}
-                </TableCell>
-              </TableRow>
-            );
-          }
-        })
+    if (isLoading) {
+      setPersonArr(
+        role === "Trener" ? GetStudents(userId) : GetTrainers(userId)
       );
-    } else {
+      personArr === undefined ? setLoading(true) : setLoading(false);
+    }
+    if (isLoading === false) {
       setRenderedList(
-        hours.map(({ requester }) => {
-          if (currentPerson !== requester) {
-            currentPerson = requester;
-            api.get(`/Account/${requester}`).then((response) => {
-              setPersonName(
-                response.data.firstName + " " + response.data.lastName
-              );
-            });
-            return (
-              <TableRow key={requester}>
-                <TableCell component={Link} to={`/userInfo/${requester}`}>
-                  {personName}
-                </TableCell>
-              </TableRow>
-            );
-          }
+        personArr.map(({ name, id }) => {
+          return (
+            <TableRow key={id}>
+              <TableCell component={Link} to={`/userInfo/${id}`}>
+                {name}
+              </TableCell>
+            </TableRow>
+          );
         })
       );
     }
-  }, [hours, role, accessToken, start, userId]);
+  }, [personArr, role, userId, isLoading]);
   return (
     <Paper elevation={2}>
       <Table>
@@ -78,7 +55,7 @@ const ListUsers = () => {
             </TableCell>
           </TableRow>
         </TableHead>
-        <TableBody>{renderedList}</TableBody>
+        <TableBody>{isLoading ? <div>Loading</div> : renderedList}</TableBody>
       </Table>
     </Paper>
   );

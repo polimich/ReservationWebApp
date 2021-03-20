@@ -13,12 +13,12 @@ const HomePage = () => {
     <NoLogin />
   ) : (
     <Grid container spacing={2}>
-      <Grid item xs={12}>
+      {/* <Grid item xs={12}>
         <Typography variant="h6">Timetable:</Typography>
       </Grid>
       <Grid item xs={12}>
         <Timetable userId={userId} />
-      </Grid>
+      </Grid> */}
       <Grid item xs={12}>
         <ListUsers />
       </Grid>

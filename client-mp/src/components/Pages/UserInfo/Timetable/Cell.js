@@ -68,7 +68,15 @@ const Cell = ({ date, userId }) => {
   return (
     <>
       <TableCell align="center">
-        <Card>
+        <Card
+          elevation={
+            personName === undefined &&
+            name === undefined &&
+            requesterName === undefined
+              ? 0
+              : 2
+          }
+        >
           <CardContent>
             <Typography variant="h6">
               {role === "Trener" ? personName : name}

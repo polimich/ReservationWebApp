@@ -68,8 +68,7 @@ const LoginPage = () => {
                 type: SET_WHAT_I_TEACH,
                 payload: response.data.whatITeach,
               });
-
-              console.log(response.data);
+              sessionStorage.setItem("JWT", response.data.token.accessToken);
             })
             .catch((err) => {
               alert("Chybicka");

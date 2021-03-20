@@ -26,12 +26,20 @@ require("datejs");
 const AddButton = ({ userId }) => {
   const [{ accessToken, role, whatITeach }] = useAppContext();
   const [openDialog, setOpenDialog] = useState(false);
-  const [zaci, setZaci] = useState();
-
+  const [zaci, setZaci] = useState([]);
   useEffect(() => {
-    setZaci(GetStudents(userId));
-    console.log(zaci);
-  }, [userId]);
+    api.get("/Account/GetAllStudents").then((res) => {
+      res.data.map((zak) => {
+        setZaci((zaci) => [
+          ...zaci,
+          {
+            id: zak.id,
+            name: zak.firstName + " " + zak.lastName,
+          },
+        ]);
+      });
+    });
+  }, []);
 
   const INITIAL_FORM_STATE = {
     name: whatITeach,

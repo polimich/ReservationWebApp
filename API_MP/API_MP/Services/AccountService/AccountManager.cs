@@ -195,5 +195,9 @@ namespace API_MP.Services
             var role = await _userManager.IsInRoleAsync(user, "Trener");
             return role ? "Trener" : "Student";
         }
+        public async Task<ICollection<ApplicationUser>> GetAllStudents()
+        {
+            return await _userManager.GetUsersInRoleAsync("Student");
+        }
     }
 }

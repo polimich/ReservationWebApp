@@ -21,11 +21,11 @@ namespace API_MP.Controllers
         }
         
         [HttpGet]
-        [Authorize]
         public async Task<IEnumerable<Hour>> Get()
         {
             return await _hourManager.ListAllHours();
         }
+
         [HttpGet("[action]/{userid}/{startdate}")]
 
         public async Task<IEnumerable<Hour>> GetUsersWeek(string userid, string startdate)
@@ -58,7 +58,6 @@ namespace API_MP.Controllers
         {
             await _hourManager.Delete(id);
         }
-        [Authorize]
         [HttpGet("{id}")]
         public async Task Get(int id)
         {

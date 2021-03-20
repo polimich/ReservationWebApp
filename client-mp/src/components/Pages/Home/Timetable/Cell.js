@@ -23,6 +23,7 @@ import SubmitButton from "../../../FormUI/Button";
 import AddIcon from "@material-ui/icons/Add";
 import { GetStudents } from "./Functions";
 import { Alert } from "@material-ui/lab";
+import axios from "axios";
 require("datejs");
 
 //*TODO rerender after edit, cely rozvrh
@@ -93,19 +94,27 @@ const Cell = ({ date, userId }) => {
       //Trener
       if (role === "Trener") {
         //Najde jestli dany trener (userId) ma v case date hodinu a zapiše zakovo Id
-        api.get(`/Hour/${userId}/${date}`).then((response) => {
-          setPersonId(response.data.person);
-          setHour(response.data);
-        });
+        api
+          .get(`/Hour/${userId}/${date}`, {
+            headers: { Authorization: "Bearer " + accessToken },
+          })
+          .then((response) => {
+            setPersonId(response.data.person);
+            setHour(response.data);
+          });
         //Zjisti vsechny hodiny trenera a vytvori seznam trenerovych zaku
         setZaci(GetStudents(userId));
         //Pokud nasel hodinu, vezme ZakovoId (PersonId) a zjisti jeho jmeno
         if (personId !== undefined) {
-          api.get(`/Account/${personId}`).then((response) => {
-            setPersonName(response.data.lastName);
-            setAddDialogVisibility(false);
-            setEditDialogVisibility(true);
-          });
+          api
+            .get(`/Account/${personId}`, {
+              headers: { Authorization: "Bearer " + accessToken },
+            })
+            .then((response) => {
+              setPersonName(response.data.lastName);
+              setAddDialogVisibility(false);
+              setEditDialogVisibility(true);
+            });
         }
         if (personId === undefined) {
           setPersonName(<AddIcon />);
@@ -131,7 +140,15 @@ const Cell = ({ date, userId }) => {
   return (
     <>
       <TableCell align="center" onClick={handleOpenDialogs}>
-        <Card>
+        <Card
+          elevation={
+            personName === undefined &&
+            name === undefined &&
+            requesterName === undefined
+              ? 0
+              : 2
+          }
+        >
           <CardContent>
             <Typography variant="h6">
               {role === "Trener" ? personName : name}
