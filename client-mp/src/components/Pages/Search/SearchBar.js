@@ -1,6 +1,7 @@
 import { Grid, TextField, Typography } from "@material-ui/core";
 import React from "react";
-import { Input, Label } from "reactstrap";
+
+//* Komponenta sloužící k zadání výrazu, kterým se má filtrovat seznam uživatelů
 const SearchBar = ({ label, term, setTerm }) => {
   return (
     <Grid container spacing={2}>

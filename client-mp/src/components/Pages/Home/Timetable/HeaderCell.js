@@ -1,6 +1,7 @@
 import { Card, CardContent, TableCell, Typography } from "@material-ui/core";
 import React from "react";
 
+//* Komponenta ktera slouzi pro zahlavi tabulky
 const HeaderCell = ({ title }) => {
   console.log(title === "Monday");
   return (

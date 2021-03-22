@@ -7,6 +7,9 @@ using System.Threading.Tasks;
 
 namespace API_MP.Model
 {
+    /// <summary>
+    /// Model uživatele rozšiřující základního IdentityUsera
+    /// </summary>
     public class ApplicationUser : IdentityUser
     {
         [Required]

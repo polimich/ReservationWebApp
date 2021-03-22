@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 import {
   Collapse,
   Navbar,
@@ -21,17 +22,21 @@ import {
   SET_NAME,
 } from "../../providers/ApplicationProvider";
 
+//* Menu komponenta
+//* Slouží pro navigaci v celé aplikaci, pomocí Link z React-Router
 const Menu = () => {
   const [isOpen, setIsOpen] = useState(false);
   const toggle = () => setIsOpen(!isOpen);
   const [{ accessToken, name }, dispatch] = useAppContext();
-
+  const history = useHistory();
+  //* Po klidnutí na logout se vynulují data v kontextu
   const onLogout = () => {
     toggle();
     dispatch({ type: SET_ACCESS_TOKEN, payload: null });
     dispatch({ type: SET_NAME, payload: null });
     dispatch({ type: SET_ROLE, payload: null });
     dispatch({ type: SET_USER_ID, payload: null });
+    history.push("/");
   };
   return (
     <>

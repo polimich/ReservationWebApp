@@ -22,59 +22,111 @@ namespace API_MP.Controllers
         {
             _accountManager = accountManager;
         }
-
+        /// <summary>
+        /// Vrátí všechny uživatele
+        /// </summary>
+        /// <returns></returns>
         [HttpGet]
-        public async Task<IEnumerable<ApplicationUser>> Get()
+        public async Task<IEnumerable<UserVM>> Get()
         {
             return await _accountManager.ListAllUsers();
         }
-
-        // GET api/<AccountController>/5
+        /// <summary>
+        /// Vrátí uživatele podle id
+        /// </summary>
+        /// <param name="id">id uživatele</param>
+        /// <returns></returns>
         [HttpGet("{id}")]
-        public async Task<ApplicationUser> Get(string id)
+        public async Task<UserVM> Get(string id)
         {
             return await _accountManager.Get(id);
         }
+        /// <summary>
+        /// Vrátí roli uživatele podle id
+        /// </summary>
+        /// <param name="id">id uřivatele</param>
+        /// <returns></returns>
         [HttpGet("[action]/{id}")]
         public async Task<string> GetUserRole(string id)
         {
             return await _accountManager.GetUserRole(id);
         }
+        /// <summary>
+        /// Vrátí všechny uživatele s Rolí student
+        /// </summary>
+        /// <returns></returns>
         [HttpGet("[action]")]
-        public async Task<ICollection<ApplicationUser>> GetAllStudents()
+        public async Task<ICollection<UserVM>> GetAllStudents()
         {
             return await _accountManager.GetAllStudents();
         }
-
-        // POST api/<AccountController>
+        /// <summary>
+        /// Vrátí všechny uživatele s rolí student, kteří mají hodinu s uživatelem trenér podle jeho id
+        /// </summary>
+        /// <param name="id">id uživatele s rolí trenéra</param>
+        /// <returns></returns>
+        [HttpGet("[action]/{id}")]
+        public async Task<ICollection<UserVM>> GetUsersStudents(string id)
+        {
+            return await _accountManager.GetUsersStudents(id);
+        }
+        /// <summary>
+        /// Vrátí všechny uživatele s rolí trenér, kteří mají hodinu s uživatelem student podle jeho id
+        /// </summary>
+        /// <param name="id">id uživatele s rolí student</param>
+        /// <returns></returns>
+        [HttpGet("[action]/{id}")]
+        public async Task<ICollection<UserVM>> GetUsersTrainers(string id)
+        {
+            return await _accountManager.GetUsersTrainers(id);
+        }
+        /// <summary>
+        /// Provede registraci nového uživatele
+        /// </summary>
+        /// <param name="value"> Vstupem jsou parametry podle modelu AccountRegistrationIM</param>
+        /// <returns></returns>
         [HttpPost("register")]
-        
         public async Task<IActionResult> Register([FromBody] AccountRegistrationIM value)
         {
-            return  await _accountManager.Register(value);
+            return await _accountManager.Register(value);
         }
+        /// <summary>
+        /// Provede přihlášení uživatele
+        /// </summary>
+        /// <param name="value">Vstupem jsou parametry podle modelu AccountLoginIM</param>
+        /// <returns></returns>
         [HttpPost("login")]
-        
         public async Task<IActionResult> Login([FromBody] AccountLoginIM value)
         {
             return await _accountManager.Login(value);
         }
+        /// <summary>
+        /// Provede odhlášení uživatele
+        /// </summary>
+        /// <returns></returns>
         [HttpPost("logout")]
-        public async Task<IActionResult> Logout() 
+        public async Task<IActionResult> Logout()
         {
             return await _accountManager.Logout();
         }
-
-        // PUT api/<AccountController>/5
+        /// <summary>
+        /// Změní heslo uživatele
+        /// </summary>
+        /// <param name="id">id uživatele</param>
+        /// <param name="value">parametry podle modelu ChangePasswordIM</param>
+        /// <returns></returns>
         [HttpPut("{id}")]
         public async Task<IActionResult> Put(string id, [FromBody] ChangePasswordIM value)
         {
             return await _accountManager.ChangePassword(value, id);
         }
-
-        // DELETE api/<AccountController>/5
+        /// <summary>
+        /// Odstraní uživatele a všechny hodiny kterých se účastní
+        /// </summary>
+        /// <param name="id">id uživatele</param>
+        /// <returns></returns>
         [HttpDelete("{id}")]
-        public  async Task<IActionResult> Delete(string id)
+        public async Task<IActionResult> Delete(string id)
         {
             return await _accountManager.Delete(id);
         }

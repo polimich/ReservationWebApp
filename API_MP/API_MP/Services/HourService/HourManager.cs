@@ -126,7 +126,7 @@ namespace API_MP.Services.HourService
         public async Task<Hour> GetHour(string userid, string Start)
         {
             var user = _context.Users.Find(userid);
-            
+
             if (await _userManager.IsInRoleAsync(user, "Trener"))
             {
                 return await _context.Hours.FirstOrDefaultAsync(hour => hour.Requester == userid && hour.Start == DateTime.Parse(Start));

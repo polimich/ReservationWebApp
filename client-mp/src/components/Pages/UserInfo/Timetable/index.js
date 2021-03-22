@@ -17,7 +17,7 @@ const useStyles = makeStyles({
     minWidth: 650,
   },
 });
-
+//* Funguje na stejném principu jako rozvrh pro přihlášené uživatele. Postrádá jakékoli funkce pro přidání a editaci
 const UserTimetable = () => {
   var { userID } = useParams();
   const monday = getDates(0);
@@ -25,7 +25,7 @@ const UserTimetable = () => {
   const wednesday = getDates(2);
   const thursday = getDates(3);
   const friday = getDates(4);
-  const [{ accessToken, userId, role }] = useAppContext();
+  const [{ userId }] = useAppContext();
   var user = userID === undefined ? userId : userID;
 
   const scrollRef = useRef(null);

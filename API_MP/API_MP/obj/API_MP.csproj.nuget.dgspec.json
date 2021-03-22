@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\micha\\Desktop\\ReservationWebApp\\ReservationWebApp\\API_MP\\API_MP\\API_MP.csproj": {}
+    "C:\\Users\\micha\\Desktop\\Rezevacni Web Aplikace\\ReservationWebApp\\API_MP\\API_MP\\API_MP.csproj": {}
   },
   "projects": {
-    "C:\\Users\\micha\\Desktop\\ReservationWebApp\\ReservationWebApp\\API_MP\\API_MP\\API_MP.csproj": {
+    "C:\\Users\\micha\\Desktop\\Rezevacni Web Aplikace\\ReservationWebApp\\API_MP\\API_MP\\API_MP.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\micha\\Desktop\\ReservationWebApp\\ReservationWebApp\\API_MP\\API_MP\\API_MP.csproj",
+        "projectUniqueName": "C:\\Users\\micha\\Desktop\\Rezevacni Web Aplikace\\ReservationWebApp\\API_MP\\API_MP\\API_MP.csproj",
         "projectName": "API_MP",
-        "projectPath": "C:\\Users\\micha\\Desktop\\ReservationWebApp\\ReservationWebApp\\API_MP\\API_MP\\API_MP.csproj",
+        "projectPath": "C:\\Users\\micha\\Desktop\\Rezevacni Web Aplikace\\ReservationWebApp\\API_MP\\API_MP\\API_MP.csproj",
         "packagesPath": "C:\\Users\\micha\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\micha\\Desktop\\ReservationWebApp\\ReservationWebApp\\API_MP\\API_MP\\obj\\",
+        "outputPath": "C:\\Users\\micha\\Desktop\\Rezevacni Web Aplikace\\ReservationWebApp\\API_MP\\API_MP\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\micha\\AppData\\Roaming\\NuGet\\NuGet.Config",

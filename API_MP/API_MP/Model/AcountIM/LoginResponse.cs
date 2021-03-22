@@ -5,6 +5,9 @@ using System.Threading.Tasks;
 
 namespace API_MP.Model.AcountIM
 {
+    /// <summary>
+    /// Model odpovědi po úspěšném loginu
+    /// </summary>
     public class LoginResponse
     {
         public string Name { get; set; }

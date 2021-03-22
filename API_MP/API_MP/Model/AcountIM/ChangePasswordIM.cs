@@ -5,6 +5,9 @@ using System.Threading.Tasks;
 
 namespace API_MP.Model.AcountIM
 {
+    /// <summary>
+    /// Model pro změnu hesla
+    /// </summary>
     public class ChangePasswordIM
     {
         public string OldPassword { get; set; }

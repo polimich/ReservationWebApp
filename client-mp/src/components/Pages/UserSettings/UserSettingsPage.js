@@ -7,6 +7,8 @@ import { useAppContext } from "../../../providers/ApplicationProvider";
 import Textfield from "../../FormUI/Textfield";
 import SubmitButton from "../../FormUI/Button";
 import { Alert } from "@material-ui/lab";
+
+//* Komponenta umožňující změnu hesla uživatele
 const UserSettingsPage = () => {
   const [{ userId }] = useAppContext();
   return (

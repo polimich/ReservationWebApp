@@ -7,7 +7,6 @@ using API_MP.Data;
 using API_MP.Model;
 using API_MP.Services;
 using API_MP.Services.AccountService;
-using API_MP.Services.ChangeService;
 using API_MP.Services.HourService;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
@@ -26,7 +25,7 @@ using Microsoft.OpenApi.Models;
 
 namespace API_MP
 {
-    public class Startup 
+    public class Startup
     {
         public Startup(IConfiguration configuration)
         {
@@ -51,9 +50,8 @@ namespace API_MP
             services.AddControllers();
             services.AddHttpContextAccessor();
             services.AddScoped<IHourManager, HourManager>();
-            services.AddScoped<IChangeManager, ChangeManager>();
             services.AddScoped<IAccountManager, AccountManager>();
-            
+
 
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
                 .AddJwtBearer(options =>
@@ -107,7 +105,7 @@ namespace API_MP
             }
 
             app.UseHttpsRedirection();
-            
+
             // Enable middleware to serve generated Swagger as a JSON endpoint.
             app.UseSwagger();
             app.UseCors(MyAllowSpecificOrigins);

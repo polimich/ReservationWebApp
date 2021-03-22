@@ -8,6 +8,11 @@ import {
 } from "@material-ui/core";
 import { useField, useFormikContext } from "formik";
 
+//* Wrapper pro Checkbox komponentu.
+//* Výstupem je checbox komponenta, která je připravena pro použití s formikem a Yupem
+//* legend - Nadpis
+//* label - popis
+//* name - slouzi pro identifici komponenty
 const CheckboxWrapper = ({ name, label, legend, ...otherProps }) => {
   const { setFieldValue } = useFormikContext();
   const [field, meta] = useField(name);

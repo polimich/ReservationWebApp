@@ -7,10 +7,13 @@ import RegisterPage from "./Pages/Register/RegisterPage";
 import SearchPage from "./Pages/Search/SearchPage";
 import UserSettingsPage from "./Pages/UserSettings/UserSettingsPage";
 import UserInfoPage from "./Pages/UserInfo/UserInfoPage";
-import { AppProvider, useAppContext } from "../providers/ApplicationProvider";
+import { AppProvider } from "../providers/ApplicationProvider";
 import NoLogin from "./Pages/NoLogin/NoLogin";
-import TestMaterialUIFormik from "./TestMaterialUIFormik";
 import { Container, Grid } from "@material-ui/core";
+
+//* Hlavní komponenta každé react aplikace
+//* Je zde udělaná logika routování
+//* zaveden Container pro celou aplikaci kvůli reponzivitě
 const App = () => {
   return (
     <AppProvider>
@@ -37,7 +40,6 @@ const App = () => {
                   path="/userInfo/:userID?"
                   component={UserInfoPage}
                 />
-                <Route exact path="/test" component={TestMaterialUIFormik} />
               </Switch>
             </Container>
           </Grid>

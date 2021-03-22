@@ -12,19 +12,21 @@ import { useAppContext } from "../../../../providers/ApplicationProvider";
 import AddButton from "./AddButton";
 import Cell from "./Cell";
 import HeaderCell from "./HeaderCell";
+
 const useStyles = makeStyles({
   table: {
     minWidth: 650,
   },
 });
 
+//* Komponenta Rozvrh, skláda se z buněk ve kterých se děje logika získávání dat
 const Timetable = ({ userId }) => {
   const monday = getDates(0);
   const tuesday = getDates(1);
   const wednesday = getDates(2);
   const thursday = getDates(3);
   const friday = getDates(4);
-  const [{ accessToken, role }] = useAppContext();
+  const [{ role }] = useAppContext();
   const scrollRef = useRef(null);
   const onWheel = (e) => {
     const table = scrollRef.current;
@@ -151,6 +153,7 @@ const Timetable = ({ userId }) => {
     </>
   );
 };
+//* Funkce pro vytvoreni datumu pro jednotlive bunky ve formatu ("YYYY-MM-DDTHH:mm:ss")
 const getDates = (i, separator = "-") => {
   let today = new Date();
   let dates = [];

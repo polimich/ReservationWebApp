@@ -27,7 +27,7 @@ namespace API_MP.Services
         private ApplicationDbContext _context;
         private RoleManager<ApplicationRole> _roleManager;
 
-        
+
         public AccountManager(IConfiguration config, UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager, ApplicationDbContext context, RoleManager<ApplicationRole> roleManager)
         {
 
@@ -47,14 +47,27 @@ namespace API_MP.Services
                 return Ok("User deleted");
             }
             return BadRequest("User not found");
-            
+
         }
 
-        public async Task<ICollection<ApplicationUser>> ListAllUsers()
+        public async Task<ICollection<UserVM>> ListAllUsers()
         {
-            return await _context.Users.ToListAsync();
+            var users = await _context.Users.ToListAsync();
+            List<UserVM> userVMs = new List<UserVM>();
+            foreach (var user in users)
+            {
+                UserVM userVM = new UserVM();
+                userVM.Id = user.Id;
+                userVM.Name = user.FirstName + " " + user.LastName;
+                userVMs.Add(userVM);
+            }
+            return userVMs;
         }
-
+        /// <summary>
+        /// Metoda pro přihlášení
+        /// </summary>
+        /// <param name="userData">data podle modelu AccountLoginIM</param>
+        /// <returns></returns>
         public async Task<IActionResult> Login(AccountLoginIM userData)
         {
             var result = await _signInManager.PasswordSignInAsync(userData.Email, userData.Password, false, false);
@@ -64,8 +77,8 @@ namespace API_MP.Services
                 var role = await _userManager.IsInRoleAsync(user, "Trener");
                 AuthorizationToken token = GenerateJSONWebToken(user);
                 LoginResponse response = new LoginResponse();
-                response.Name = user.FirstName +" "+ user.LastName;
-                response.Role = role? "Trener" : "Student";
+                response.Name = user.FirstName + " " + user.LastName;
+                response.Role = role ? "Trener" : "Student";
                 response.Token = token;
                 response.UserId = user.Id;
                 response.WhatITeach = user.WhatITeach;
@@ -73,7 +86,11 @@ namespace API_MP.Services
             }
             return Unauthorized();
         }
-
+        /// <summary>
+        /// Metoda pro registraci
+        /// </summary>
+        /// <param name="input">data podle modelu AccountRegistrationIM</param>
+        /// <returns></returns>
         public async Task<IActionResult> Register(AccountRegistrationIM input)
         {
             var user = await _userManager.FindByNameAsync(input.Email);
@@ -94,8 +111,8 @@ namespace API_MP.Services
 
 
             };
-            
-            
+
+            //Po registraci následnuje přihlášení
             var result = _userManager.CreateAsync(newUser, input.Password).Result;
             await _userManager.AddToRoleAsync(newUser, input.Role);
             if (result.Succeeded)
@@ -114,6 +131,7 @@ namespace API_MP.Services
                     response.WhatITeach = user.WhatITeach;
                     return Ok(response);
                 }
+                //Ošetření chybových hlášek
                 else { return BadRequest(result.Errors); }
             }
             else
@@ -121,7 +139,12 @@ namespace API_MP.Services
                 return BadRequest(result.Errors);
             }
         }
-
+        /// <summary>
+        /// Metoda na změnu hesla
+        /// </summary>
+        /// <param name="password"> data podle modelu ChangePasswordIM</param>
+        /// <param name="id">id uživatele</param>
+        /// <returns></returns>
         public async Task<IActionResult> ChangePassword(ChangePasswordIM password, string id)
         {
             var user = await _userManager.FindByIdAsync(id);
@@ -137,6 +160,7 @@ namespace API_MP.Services
                     }
                     else
                     {
+                        //Ošetření chybových hlášek
                         return BadRequest("Passwords are not the same");
                     }
                 }
@@ -144,7 +168,7 @@ namespace API_MP.Services
                 {
                     return BadRequest("Old password is incorrect");
                 }
-                
+
             }
             else
             {
@@ -153,6 +177,11 @@ namespace API_MP.Services
 
 
         }
+        /// <summary>
+        /// Metoda pro vytváření JWT Tokenu
+        /// </summary>
+        /// <param name="user">uživatel, který se přihlašuje</param>
+        /// <returns>JWT Token</returns>
         private AuthorizationToken GenerateJSONWebToken(ApplicationUser user)
         {
             var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_config["Jwt:Key"]));
@@ -171,33 +200,102 @@ namespace API_MP.Services
             var accessToken = new JwtSecurityTokenHandler().WriteToken(token);
             return new AuthorizationToken { AccessToken = accessToken };
         }
-
+        /// <summary>
+        /// Metoda pro odhlášení
+        /// </summary>
+        /// <returns>výsledek operace</returns>
         public async Task<IActionResult> Logout()
         {
 
             await _signInManager.SignOutAsync();
             return Ok("User Log out");
         }
-
-        public async Task<ApplicationUser> Get(string id)
+        /// <summary>
+        /// Metoda pro získání uživatele podle id
+        /// </summary>
+        /// <param name="id">id uživatele</param>
+        /// <returns>ApplicationUser</returns>
+        public async Task<UserVM> Get(string id)
         {
             var user = await _userManager.FindByIdAsync(id);
             if (user == null)
             {
                 return null;
             }
-            return user;
+            UserVM userVm = new UserVM();
+            userVm.Id = user.Id;
+            userVm.Name = user.FirstName + " " + user.LastName;
+            return userVm;
         }
-
+        /// <summary>
+        /// Vrátí roli uživatele
+        /// </summary>
+        /// <param name="id">id uživatele</param>
+        /// <returns>vrací string s rolí</returns>
         public async Task<string> GetUserRole(string id)
         {
             var user = await _userManager.FindByIdAsync(id);
             var role = await _userManager.IsInRoleAsync(user, "Trener");
             return role ? "Trener" : "Student";
         }
-        public async Task<ICollection<ApplicationUser>> GetAllStudents()
+        /// <summary>
+        /// Vrátí všechny uživatele s rolí student
+        /// </summary>
+        /// <returns>list studentů podle modelu userVM</returns>
+        public async Task<ICollection<UserVM>> GetAllStudents()
         {
-            return await _userManager.GetUsersInRoleAsync("Student");
+            var users = await _userManager.GetUsersInRoleAsync("Student");
+            List<UserVM> userVMs = new List<UserVM>();
+            foreach (var user in users)
+            {
+                UserVM userVM = new UserVM();
+                userVM.Id = user.Id;
+                userVM.Name = user.FirstName + " " + user.LastName;
+                userVMs.Add(userVM);
+            }
+            return userVMs;
+        }
+        /// <summary>
+        /// Vrátí všechny uživatele s rolí student, kteří mají hodinu s daných trenérem
+        /// </summary>
+        /// <returns>list studentu podle modelu userVM</returns>
+        public async Task<ICollection<UserVM>> GetUsersStudents(string id)
+        {
+            var usersHours = await _context.Hours.Where(hour => hour.Requester == id).ToListAsync();
+            List<UserVM> users = new List<UserVM>();
+            foreach (var hour in usersHours)
+            {
+                var user = await _context.Users.Where(user => user.Id == hour.Person).FirstOrDefaultAsync();
+                UserVM userVM = new UserVM();
+                userVM.Id = user.Id;
+                userVM.Name = user.FirstName + " " + user.LastName;
+                if (!users.Any(u => u.Id == userVM.Id))
+                {
+                    users.Add(userVM);
+                }
+            }
+            return users;
+        }
+        /// <summary>
+        /// Vrátí všechny uživatele s rolí trenér, kteří mají hodinu s daných studentem
+        /// </summary>
+        /// <returns>list trenéru podle modelu userVM</returns>
+        public async Task<ICollection<UserVM>> GetUsersTrainers(string id)
+        {
+            var usersHours = await _context.Hours.Where(hour => hour.Person == id).ToListAsync();
+            List<UserVM> users = new List<UserVM>();
+            foreach (var hour in usersHours)
+            {
+                var user = await _context.Users.Where(user => user.Id == hour.Requester).FirstOrDefaultAsync();
+                UserVM userVM = new UserVM();
+                userVM.Id = user.Id;
+                userVM.Name = user.FirstName + " " + user.LastName;
+                if (!users.Any(u => u.Id == userVM.Id))
+                {
+                    users.Add(userVM);
+                }
+            }
+            return users;
         }
     }
 }

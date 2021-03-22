@@ -1,7 +1,5 @@
 import {
   Button,
-  Card,
-  CardContent,
   Dialog,
   DialogActions,
   DialogContent,
@@ -19,12 +17,13 @@ import SubmitButton from "../../../FormUI/Button";
 import { Form, Formik } from "formik";
 import * as Yup from "yup";
 import { useAppContext } from "../../../../providers/ApplicationProvider";
-import { GetStudents } from "./Functions";
 import api from "../../../../api/api";
 require("datejs");
 
+//* Komponenta Add buttonu, po kliknutí se zobrazí vyskakovací okno s možností přidání hodiny
+//* Formular je resen pres formik a validace pres yup, request na api resi kompeneta api
 const AddButton = ({ userId }) => {
-  const [{ accessToken, role, whatITeach }] = useAppContext();
+  const [{ whatITeach }] = useAppContext();
   const [openDialog, setOpenDialog] = useState(false);
   const [zaci, setZaci] = useState([]);
   useEffect(() => {
@@ -34,7 +33,7 @@ const AddButton = ({ userId }) => {
           ...zaci,
           {
             id: zak.id,
-            name: zak.firstName + " " + zak.lastName,
+            name: zak.name,
           },
         ]);
       });

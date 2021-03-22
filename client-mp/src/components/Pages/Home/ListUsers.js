@@ -1,4 +1,5 @@
 import {
+  CircularProgress,
   Paper,
   Table,
   TableBody,
@@ -11,29 +12,23 @@ import { Link } from "react-router-dom";
 import { useEffect, useState } from "react/cjs/react.development";
 import api from "../../../api/api";
 import { useAppContext } from "../../../providers/ApplicationProvider";
-import { GetStudents, GetTrainers } from "./Timetable/Functions";
 require("datejs");
 
+//* Komponenta zobrazující list uživatelů(Trenérů/studentu) podle role prihlaseneho uzivatele (Studenta/Trenera)
 const ListUsers = () => {
   //const start = Date.today().toString("yyyy-MM-ddTHH:mm:ss");
-  const start = getToday();
-  const [{ accessToken, role, userId }] = useAppContext();
-  const [personName, setPersonName] = useState();
+  const [{ role, userId }] = useAppContext();
   const [personArr, setPersonArr] = useState();
-  const [isLoading, setLoading] = useState(true);
-  const [renderedList, setRenderedList] = useState();
-  var currentPerson = "";
-
+  const [loading, setLoading] = useState(false);
+  //* Dotaz na api pro ziskani dat
   useEffect(() => {
-    if (isLoading) {
-      setPersonArr(
-        role === "Trener" ? GetStudents(userId) : GetTrainers(userId)
-      );
-      personArr === undefined ? setLoading(true) : setLoading(false);
-    }
-    if (isLoading === false) {
-      setRenderedList(
-        personArr.map(({ name, id }) => {
+    setLoading(true);
+    api
+      .get(`/Account/GetUsersStudents/${userId}`)
+      .then((response) => {
+        const users = response.data;
+        // pomoci funkce map se projde odpoved a vytvori seznam uzivatelu
+        const renderedUsers = users.map(({ id, name }) => {
           return (
             <TableRow key={id}>
               <TableCell component={Link} to={`/userInfo/${id}`}>
@@ -41,35 +36,36 @@ const ListUsers = () => {
               </TableCell>
             </TableRow>
           );
-        })
-      );
-    }
-  }, [personArr, role, userId, isLoading]);
+        });
+        setPersonArr(renderedUsers);
+      })
+      .finally(() => {
+        setLoading(false);
+      });
+  }, [userId]);
+
   return (
     <Paper elevation={2}>
       <Table>
         <TableHead>
           <TableRow>
             <TableCell>
-              {role === "Trener" ? "Students:" : "Teachers:"}
+              {role === "Trener" ? "Students:" : "Teacher:"}
             </TableCell>
           </TableRow>
         </TableHead>
-        <TableBody>{isLoading ? <div>Loading</div> : renderedList}</TableBody>
+        <TableBody>
+          {/* Dokud se nenactou data z API zobrazuje se Spinner */}
+          {loading ? (
+            <TableCell>
+              <CircularProgress />
+            </TableCell>
+          ) : (
+            personArr
+          )}
+        </TableBody>
       </Table>
     </Paper>
   );
 };
-
-const getToday = (separator = "-") => {
-  let today = new Date();
-  let day = today.getDate();
-  let month = today.getMonth() + 1;
-  let year = today.getFullYear();
-
-  return `${year}${separator}${
-    month < 10 ? `0${month}` : `${month}`
-  }${separator}${day}T00:00:00`;
-};
-
 export default ListUsers;

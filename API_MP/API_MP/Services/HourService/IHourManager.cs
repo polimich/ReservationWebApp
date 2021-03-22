@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace API_MP.Services.HourService
 {
+    /// <summary>
+    /// Rozhoraní pro metody pracující s Hour Entitou
+    /// </summary>
     public interface IHourManager
     {
         Task<ICollection<Hour>> ListAllHours();

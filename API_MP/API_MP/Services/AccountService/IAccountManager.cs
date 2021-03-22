@@ -8,16 +8,21 @@ using System.Threading.Tasks;
 
 namespace API_MP.Services.AccountService
 {
+    /// <summary>
+    /// Rozhraní pracující s ApplicationUser Entitou
+    /// </summary>
     public interface IAccountManager
     {
-        Task<ICollection<ApplicationUser>> ListAllUsers();
+        Task<ICollection<UserVM>> ListAllUsers();
         Task<IActionResult> Register(AccountRegistrationIM input);
         Task<IActionResult> Login(AccountLoginIM input);
         Task<IActionResult> Logout();
         Task<IActionResult> ChangePassword(ChangePasswordIM password, string id);
         Task<IActionResult> Delete(string id);
-        Task<ApplicationUser> Get(string id);
+        Task<UserVM> Get(string id);
         Task<string> GetUserRole(string id);
-        Task<ICollection<ApplicationUser>> GetAllStudents();
+        Task<ICollection<UserVM>> GetAllStudents();
+        Task<ICollection<UserVM>> GetUsersStudents(string id);
+        Task<ICollection<UserVM>> GetUsersTrainers(string id);
     }
 }

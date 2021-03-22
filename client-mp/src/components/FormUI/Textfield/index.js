@@ -2,6 +2,9 @@ import React from "react";
 import { TextField } from "@material-ui/core";
 import { useField } from "formik";
 
+//* Wrapper pro Textfield komponenty.
+//* Výstupem je Textfield komponenta, která je připravena pro použití s formikem a Yupem
+//* name - slouzi pro identifici komponenty
 const TextfieldWrapper = ({ name, ...otherProps }) => {
   const [field, meta] = useField(name);
 

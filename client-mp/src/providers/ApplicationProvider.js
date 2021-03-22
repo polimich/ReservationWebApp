@@ -1,5 +1,6 @@
 import { createContext, useReducer, useContext } from "react";
 
+//* Definice Kontexu aplikace, nastavení globálně přístupných proměnných, vytvoření provideru
 const initialState = {
   accessToken: null,
   name: null,

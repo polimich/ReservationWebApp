@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "IWykJ+wjDjMhgB3TvyAy+YzggagDyS65mul8pP85a6lhXB15cuTcl6/TKnVexMbaa45lH2grRUoLX6BiPlDb0g==",
+  "dgSpecHash": "XvDUoVZvsR+N2hXT15Lwj8kBXaYorHtYhb+6aBhhxUevrlRbk9druckPq6OKyMY6wbwSTSV4LA7w63gxKMGz6Q==",
   "success": true,
-  "projectFilePath": "C:\\Users\\micha\\Desktop\\ReservationWebApp\\ReservationWebApp\\API_MP\\API_MP\\API_MP.csproj",
+  "projectFilePath": "C:\\Users\\micha\\Desktop\\Rezevacni Web Aplikace\\ReservationWebApp\\API_MP\\API_MP\\API_MP.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\micha\\.nuget\\packages\\mailkit\\2.10.1\\mailkit.2.10.1.nupkg.sha512",
     "C:\\Users\\micha\\.nuget\\packages\\microsoft.aspnetcore.authentication.jwtbearer\\3.1.12\\microsoft.aspnetcore.authentication.jwtbearer.3.1.12.nupkg.sha512",

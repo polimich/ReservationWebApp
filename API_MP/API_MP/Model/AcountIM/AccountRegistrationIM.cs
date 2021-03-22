@@ -5,6 +5,9 @@ using System.Threading.Tasks;
 
 namespace API_MP.Model
 {
+    /// <summary>
+    /// Model pro registraci uživatele
+    /// </summary>
     public class AccountRegistrationIM
     {
         public string Email { get; set; }

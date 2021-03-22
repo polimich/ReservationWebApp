@@ -15,7 +15,8 @@ import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 import { Container, Grid } from "@material-ui/core";
 import Textfield from "../../FormUI/Textfield";
 import Button from "../../FormUI/Button";
-// And now we can use these
+
+//* Prihlasovaci komponenta
 const LoginPage = () => {
   const [
     { accessToken, name, role, userId, whatITeach },
@@ -54,6 +55,7 @@ const LoginPage = () => {
               }
             )
             .then((response) => {
+              //* Nacteni dat o uzivateli do kontextui aplikace
               dispatch({
                 type: SET_ACCESS_TOKEN,
                 payload: response.data.token.accessToken,

@@ -21,13 +21,11 @@ import DateTimePicker from "../../../FormUI/DateTimePicker";
 import Checkbox from "../../../FormUI/Checkbox";
 import SubmitButton from "../../../FormUI/Button";
 import AddIcon from "@material-ui/icons/Add";
-import { GetStudents } from "./Functions";
 import { Alert } from "@material-ui/lab";
-import axios from "axios";
 require("datejs");
 
 //*TODO rerender after edit, cely rozvrh
-
+//* Komponenta Cell slouzi pro vykreslovani bunky v rozvrhu, po kliknuti na bunku se podle obsahu bunky otevre Add nebo Edit Dialog
 const Cell = ({ date, userId }) => {
   const [name, setName] = useState();
   const [personName, setPersonName] = useState();
@@ -87,7 +85,7 @@ const Cell = ({ date, userId }) => {
     startEdit: Yup.string().required("Choose when the hour starts"),
     oneTimeEdit: Yup.boolean(),
   });
-
+  //* nacteni všech hodnot do state
   useEffect(() => {
     //user musi byt prihlasen
     if (userId !== null) {
@@ -103,7 +101,9 @@ const Cell = ({ date, userId }) => {
             setHour(response.data);
           });
         //Zjisti vsechny hodiny trenera a vytvori seznam trenerovych zaku
-        setZaci(GetStudents(userId));
+        api.get(`/Account/GetUsersStudents/${userId}`).then((response) => {
+          setZaci(response.data);
+        });
         //Pokud nasel hodinu, vezme ZakovoId (PersonId) a zjisti jeho jmeno
         if (personId !== undefined) {
           api
@@ -111,7 +111,7 @@ const Cell = ({ date, userId }) => {
               headers: { Authorization: "Bearer " + accessToken },
             })
             .then((response) => {
-              setPersonName(response.data.lastName);
+              setPersonName(response.data.name);
               setAddDialogVisibility(false);
               setEditDialogVisibility(true);
             });
@@ -130,12 +130,12 @@ const Cell = ({ date, userId }) => {
         });
         if (requesterId !== undefined) {
           api.get(`/Account/${requesterId}`).then((response) => {
-            setRequesterName(response.data.lastName);
+            setRequesterName(response.data.name);
           });
         }
       }
     }
-  }, [personId, requesterId, date, role, userId]);
+  }, [personId, requesterId, date, role, userId, accessToken]);
 
   return (
     <>
@@ -149,14 +149,16 @@ const Cell = ({ date, userId }) => {
               : 2
           }
         >
+          {/* podle role se vypisuje jiny obsah  */}
           <CardContent>
-            <Typography variant="h6">
+            <Typography variant="subtitle2">
               {role === "Trener" ? personName : name}
             </Typography>
             <Typography>{role === "Trener" ? " " : requesterName}</Typography>
           </CardContent>
         </Card>
       </TableCell>
+      {/* Vyskakovací okno pro pridani hodiny */}
       <Dialog open={openAddDialog} onClose={handleCloseDialogs}>
         <DialogTitle id="add-hour-form">
           {"Hour: " +
@@ -207,6 +209,7 @@ const Cell = ({ date, userId }) => {
           </Formik>
         </DialogContent>
       </Dialog>
+      {/* Vyskakovací okno pro editaci hodiny */}
       <Dialog open={openEditDialog} onClose={handleCloseDialogs}>
         <DialogTitle id="Edit-dialog">Edit Dialog</DialogTitle>
         <DialogContent>

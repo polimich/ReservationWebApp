@@ -1,22 +1,9 @@
-import { Form, Formik } from "formik";
 import React from "react";
 import { useEffect, useState } from "react/cjs/react.development";
-import * as Yup from "yup";
+
 import api from "../../../../api/api";
 import { useAppContext } from "../../../../providers/ApplicationProvider";
-import {
-  Button,
-  Card,
-  CardContent,
-  Dialog,
-  DialogActions,
-  DialogContent,
-  DialogTitle,
-  Grid,
-  TableCell,
-  Typography,
-} from "@material-ui/core";
-import AddIcon from "@material-ui/icons/Add";
+import { Card, CardContent, TableCell, Typography } from "@material-ui/core";
 require("datejs");
 
 //*TODO rerender after edit, cely rozvrh
@@ -46,7 +33,7 @@ const Cell = ({ date, userId }) => {
         //Pokud nasel hodinu, vezme ZakovoId (PersonId) a zjisti jeho jmeno
         if (personId !== undefined) {
           api.get(`/Account/${personId}`).then((response) => {
-            setPersonName(response.data.lastName);
+            setPersonName(response.data.name.split(" ")[1]);
           });
         }
         //Student
@@ -58,7 +45,7 @@ const Cell = ({ date, userId }) => {
         });
         if (requesterId !== undefined) {
           api.get(`/Account/${requesterId}`).then((response) => {
-            setRequesterName(response.data.lastName);
+            setRequesterName(response.data.name.split(" ")[1]);
           });
         }
       }
