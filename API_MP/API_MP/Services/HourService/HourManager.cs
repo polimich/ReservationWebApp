@@ -22,7 +22,11 @@ namespace API_MP.Services.HourService
             _httpContextAccessor = httpContextAccessor;
             _userManager = userManager;
         }
-
+        /// <summary>
+        /// Metoda pro vytvoření hodiny
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
         public async Task<Hour> Create(Hour input)
         {
             Hour newHour = new Hour
@@ -39,7 +43,11 @@ namespace API_MP.Services.HourService
             await _context.SaveChangesAsync();
             return newHour;
         }
-
+        /// <summary>
+        /// Metoda pro smazání hodiny
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public async Task<Hour> Delete(int id)
         {
             Hour hour = _context.Hours.Find(id);
@@ -50,12 +58,19 @@ namespace API_MP.Services.HourService
             }
             return hour;
         }
-
+        /// <summary>
+        /// Metoda pro výpis všech hodin
+        /// </summary>
+        /// <returns></returns>
         public async Task<ICollection<Hour>> ListAllHours()
         {
             return await _context.Hours.ToListAsync();
         }
-
+        /// <summary>
+        /// Metoda pro cteni hodiny
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public async Task<Hour> Read(int id)
         {
             Hour hour = await _context.Hours.Where(x => x.Id == id).FirstOrDefaultAsync();
@@ -68,7 +83,11 @@ namespace API_MP.Services.HourService
                 return null;
             }
         }
-
+        /// <summary>
+        /// Metoda pro upraveni hodiny
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
         public async Task<Hour> Update(Hour input)
         {
             Hour hour = _context.Hours.Find(input.Id);
@@ -90,7 +109,12 @@ namespace API_MP.Services.HourService
 
 
         }
-
+        /// <summary>
+        /// metoda pro ziskani seznamu hodin uzivatele na dany tyden
+        /// </summary>
+        /// <param name="userid"></param>
+        /// <param name="startdate"></param>
+        /// <returns></returns>
         public async Task<ICollection<Hour>> GetUsersWeek(string userid, string startdate)
         {
             DateTime Start = DateTime.Parse(startdate);
@@ -105,14 +129,22 @@ namespace API_MP.Services.HourService
 
             }
         }
-
+        /// <summary>
+        /// metoda zjistujici konec tydne na zaklade data
+        /// </summary>
+        /// <param name="dateTime"></param>
+        /// <returns></returns>
         public static DateTime EndOfWeek(DateTime dateTime)
         {
             DateTime start = StartOfWeek(dateTime);
 
             return start.AddDays(6);
         }
-
+        /// <summary>
+        /// metoda zjistujici zacatek tydne na zaklade data
+        /// </summary>
+        /// <param name="dateTime"></param>
+        /// <returns></returns>
         public static DateTime StartOfWeek(DateTime dateTime)
         {
             int days = dateTime.DayOfWeek - DayOfWeek.Monday;
@@ -122,7 +154,12 @@ namespace API_MP.Services.HourService
 
             return dateTime.AddDays(-1 * days).Date;
         }
-
+        /// <summary>
+        /// Metoda na ziskani hodiny na zaklade userid a data
+        /// </summary>
+        /// <param name="userid"></param>
+        /// <param name="Start"></param>
+        /// <returns></returns>
         public async Task<Hour> GetHour(string userid, string Start)
         {
             var user = _context.Users.Find(userid);
@@ -136,6 +173,11 @@ namespace API_MP.Services.HourService
                 return await _context.Hours.FirstOrDefaultAsync(hour => hour.Person == userid && hour.Start == DateTime.Parse(Start));
             }
         }
+        /// <summary>
+        /// metoda pro ziskani vsech hodin daneho uzivatele
+        /// </summary>
+        /// <param name="userid"></param>
+        /// <returns></returns>
         public async Task<ICollection<Hour>> GetAllUsersHours(string userid)
         {
             return await _context.Hours.Where(hour => hour.Requester == userid).ToListAsync();
